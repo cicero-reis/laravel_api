@@ -1,3 +1,4 @@
+#!/bin/sh
 set -e
 
 echo "🖌️  Iniciando Pint..."
@@ -5,6 +6,6 @@ echo "🖌️  Iniciando Pint..."
 echo "✅ Pint finalizado!"
 echo
 
-echo "🧪 Iniciando Pest..."
-./vendor/bin/pest --stop-on-failure --colors=always
-echo "✅ Pest finalizado!"
+echo "🧪 Iniciando PHPUnit..."
+./vendor/bin/phpunit --colors=always
+echo "✅ PHPUnit finalizado!"
