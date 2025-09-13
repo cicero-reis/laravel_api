@@ -2,16 +2,16 @@
 
 namespace Tests\Unit\Core\Task;
 
-use PHPUnit\Framework\TestCase;
-use App\Core\Task\UseCases\ListTasksUseCase;
 use App\Core\Task\Repositories\Interfaces\ListTasksRepositoryInterface;
+use App\Core\Task\UseCases\ListTasksUseCase;
+use PHPUnit\Framework\TestCase;
 
 class ListTasksUseCaseTest extends TestCase
 {
     public function test_execute_calls_repository_and_returns_result()
     {
         $filters = ['name' => 'Task'];
-        
+
         $paginate = true;
 
         $expectedResult = [

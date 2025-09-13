@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Http\Controllers\Api\V1;
 
+use App\Models\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\Models\Task;
 
 class TaskControllerTest extends TestCase
 {

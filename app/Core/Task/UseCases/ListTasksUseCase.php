@@ -9,12 +9,10 @@ class ListTasksUseCase implements ListTasksUseCaseInterface
 {
     public function __construct(
         private ListTasksRepositoryInterface $listTasksRepository
-    ) {
-    }
+    ) {}
 
     public function execute(array $filters, $paginate = true): mixed
     {
         return $this->listTasksRepository->listRepo($filters, $paginate);
     }
 }
-

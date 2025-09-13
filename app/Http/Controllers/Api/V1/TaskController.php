@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Core\Task\UseCases\Interfaces\ListTasksUseCaseInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
-use Illuminate\Http\JsonResponse;
 use App\Http\Resources\TaskResourceCollection;
-use App\Core\Task\UseCases\Interfaces\ListTasksUseCaseInterface;
+use Illuminate\Http\JsonResponse;
 
 class TaskController extends Controller
 {
@@ -15,7 +15,7 @@ class TaskController extends Controller
 
     public function __construct(ListTasksUseCaseInterface $listTasksUseCase)
     {
-        $this->listTasksUseCase = $listTasksUseCase;    
+        $this->listTasksUseCase = $listTasksUseCase;
     }
 
     /**
@@ -25,16 +25,16 @@ class TaskController extends Controller
     {
         try {
 
-            $filters = request()->only(['name','is_completed','created_at']);
-    
+            $filters = request()->only(['name', 'is_completed', 'created_at']);
+
             $tasks = $this->listTasksUseCase->execute($filters, true);
-    
+
             if (empty($tasks->items())) {
                 throw new \App\Exceptions\NotFoundException('No tasks found', 404);
             }
-    
+
             $tasksCollection = new TaskResourceCollection($tasks);
-    
+
             return new JsonResponse($tasksCollection, 200);
         } catch (\App\Exceptions\NotFoundException $e) {
             return new JsonResponse(['error' => $e->getMessage()], $e->getCode());

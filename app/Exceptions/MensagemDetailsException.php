@@ -2,15 +2,15 @@
 
 namespace App\Exceptions;
 
-use Exception;
-
 class MensagemDetailsException
 {
     private int $code;
+
     private string $details;
+
     private string $message;
 
-    public function __construct(string $message, string $details = "", int $code = 400)
+    public function __construct(string $message, string $details = '', int $code = 400)
     {
         $this->message = $message;
         $this->details = $details;
@@ -40,5 +40,4 @@ class MensagemDetailsException
             'code' => $this->code,
         ];
     }
-
 }

@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
             \App\Core\Task\Repositories\Interfaces\ListTasksRepositoryInterface::class,
             \App\Core\Task\Repositories\ListTasksRepository::class
         );
-    
+
         // Task Use Case Bindings
         $this->app->bind(
             \App\Core\Task\UseCases\Interfaces\ListTasksUseCaseInterface::class,
@@ -27,7 +27,5 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
-    {   
-    }
+    public function boot(): void {}
 }

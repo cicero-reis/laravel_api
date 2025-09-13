@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Core\Task;
 
-use PHPUnit\Framework\TestCase;
 use App\Core\Task\UseCases\Interfaces\ListTasksUseCaseInterface;
+use PHPUnit\Framework\TestCase;
 
 class ListTasksUseCaseInterfaceTest extends TestCase
 {

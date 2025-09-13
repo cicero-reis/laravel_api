@@ -12,7 +12,7 @@ class ListTasksRepository implements ListTasksRepositoryInterface
         $query = Task::query();
 
         if (isset($filters['name'])) {
-            $query->where('name', 'like', '%' . $filters['name'] . '%');
+            $query->where('name', 'like', '%'.$filters['name'].'%');
         }
 
         if (isset($filters['is_completed'])) {
