@@ -1,0 +1,94 @@
+services:
+
+  app:
+    image: ciceroreis/laravel:latest
+    container_name: app
+    ports:
+      - "8001:8080"
+    volumes:
+      - ./:/application
+    user: "1001:1001"
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - MODE=dev 
+      - OCTANE_PORT=8080
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - laravel_network
+    depends_on:
+      - redis
+
+  mysql:
+    image: mysql:${MYSQL_VERSION:-8.0}
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-root}
+      - MYSQL_DATABASE=${DB_DATABASE:-laravel_api}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - laravel_network
+
+  redis:
+    image: redis:5
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - laravel_network
+  
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: mailpit
+    ports:
+      - '${FORWARD_MAILPIT_PORT:-1025}:1025'
+      - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
+    volumes:
+      - mailpit-data:/data
+    networks:
+      - laravel_network
+
+  localstack:
+    image: localstack/localstack
+    container_name: localstack
+    ports:
+        - "127.0.0.1:4566:4566"
+        - "127.0.0.1:4510-4559:4510-4559"
+    environment:
+        - DEBUG=1
+        - SERVICES=apigateway,apigatewayv2,s3,sqs,cloudwatch,logs,ses,dynamodb,lambda'
+    extra_hosts:
+        - "host.docker.internal:host-gateway"
+    volumes:
+        - localstack_data:/var/lib/localstack
+        - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+        - laravel_network
+
+networks:
+  laravel_network:
+    name: laravel_network
+    driver: bridge
+
+volumes:
+  mysql_data:
+    name: mysql_data
+    driver: local
+  redis-data:
+    name: redis-data
+    driver: local
+  mailpit-data:
+    name: mailpit-data
+    driver: local
+  localstack_data:
+    name: localstack_data
+    driver: local

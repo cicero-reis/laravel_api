@@ -1,0 +1,10 @@
+set -e
+
+echo "🖌️  Iniciando Pint..."
+./vendor/bin/pint
+echo "✅ Pint finalizado!"
+echo
+
+echo "🧪 Iniciando Pest..."
+./vendor/bin/pest --stop-on-failure --colors=always
+echo "✅ Pest finalizado!"
