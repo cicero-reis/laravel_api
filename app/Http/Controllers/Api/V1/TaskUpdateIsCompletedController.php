@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Http\Controllers\Api\V1;
+
+use App\Core\Task\UseCases\Interfaces\TaskUpdateIsCompletedUseCaseInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Core\Task\DTO\TaskUpdateIsCompletedDTO;
+use App\Http\Resources\TaskResource;
+use App\Http\Requests\TaskUpdateIsCompletedRequest;
+use App\Exceptions\NotFoundException;
+use App\Exceptions\MensagemDetailsException;
+
+class TaskUpdateIsCompletedController
+{
+    protected $useCase;
+
+    public function __construct(TaskUpdateIsCompletedUseCaseInterface $useCase)
+    {
+        $this->useCase = $useCase;
+    }   
+    
+    public function __invoke(TaskUpdateIsCompletedRequest $request, int $id): JsonResponse
+    {
+        try {
+            $dto = new TaskUpdateIsCompletedDTO(
+                $id,
+                $request->input('is_completed')
+            );
+
+            $task = $this->useCase->execute($dto);
+
+            if (!$task) {
+                throw new NotFoundException('No tasks found', null, 404);
+            }
+
+            $result = new TaskResource($task);
+            return new JsonResponse($result, 200);
+        } catch (NotFoundException $e) {
+            $message = new MensagemDetailsException($e->getMessage(), 'error', 404);
+            return new JsonResponse($message->toArray(), 404);
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => 'An error occurred while fetching tasks'], 500);
+        } catch (\Throwable $e) {
+            return new JsonResponse(['error' => 'A critical error occurred'], 500);
+        }
+    }
+}

@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers\Api\V1;
+namespace Tests\Feature;
 
 use App\Models\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class TaskControllerTest extends TestCase
+class TaskListControllerTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -35,7 +35,9 @@ class TaskControllerTest extends TestCase
         // Assert: check response
         $response->assertStatus(404);
         $response->assertJson([
-            'error' => 'No tasks found',
+            "message" => "No tasks found",
+            "details" => "error",
+            "code" => 404
         ]);
     }
 }

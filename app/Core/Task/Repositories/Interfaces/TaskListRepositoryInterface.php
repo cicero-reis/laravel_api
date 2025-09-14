@@ -2,7 +2,7 @@
 
 namespace App\Core\Task\Repositories\Interfaces;
 
-interface ListTasksRepositoryInterface
+interface TaskListRepositoryInterface
 {
     public function listRepo(array $filters, $paginate = true): mixed;
 }

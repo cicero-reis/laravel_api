@@ -2,7 +2,7 @@
 
 namespace App\Core\Task\UseCases\Interfaces;
 
-interface ListTasksUseCaseInterface
+interface TaskListUseCaseInterface
 {
     public function execute(array $filters, $paginate = true): mixed;
 }

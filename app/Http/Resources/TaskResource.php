@@ -18,7 +18,7 @@ class TaskResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'is_completed' => $this->is_completed,
+            'is_completed' => $this->is_completed ? 1 : 0,
             'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
         ];
     }

@@ -7,7 +7,7 @@ services:
       - "8001:8080"
     volumes:
       - ./:/application
-    user: "1001:1001"
+    user: ${UID}:${GID}
     environment:
       - APP_ENV=local
       - APP_DEBUG=true

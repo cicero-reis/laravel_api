@@ -1,4 +1,13 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm run test
+set -e
+
+echo "🖌️  Iniciando Pint..."
+./vendor/bin/pint
+echo "✅ Pint finalizado!"
+echo
+
+echo "🧪 Iniciando PHPUnit..."
+./vendor/bin/phpunit
+echo "✅ PHPUnit finalizado!"

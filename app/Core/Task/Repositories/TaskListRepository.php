@@ -2,10 +2,10 @@
 
 namespace App\Core\Task\Repositories;
 
-use App\Core\Task\Repositories\Interfaces\ListTasksRepositoryInterface;
+use App\Core\Task\Repositories\Interfaces\TaskListRepositoryInterface;
 use App\Models\Task;
 
-class ListTasksRepository implements ListTasksRepositoryInterface
+class TaskListRepository implements TaskListRepositoryInterface
 {
     public function listRepo(array $filters, $paginate = true): mixed
     {
