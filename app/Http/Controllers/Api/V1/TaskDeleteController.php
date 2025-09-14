@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Core\Task\UseCases\Interfaces\TaskDeleteUseCaseInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Exceptions\NotFoundException;
 use App\Exceptions\MensagemDetailsException;
+use App\Exceptions\NotFoundException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TaskDeleteController
 {
@@ -20,12 +20,14 @@ class TaskDeleteController
     {
         try {
             $deleted = $this->useCase->execute($id);
-            if (!$deleted) {
+            if (! $deleted) {
                 throw new NotFoundException('No tasks found', 404);
             }
+
             return new JsonResponse(null, 204);
         } catch (NotFoundException $e) {
             $message = new MensagemDetailsException($e->getMessage(), 'error', 404);
+
             return new JsonResponse($message->toArray(), 404);
         } catch (\Exception $e) {
             return new JsonResponse(['error' => 'An error occurred while fetching tasks'], 500);

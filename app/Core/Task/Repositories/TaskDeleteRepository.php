@@ -10,9 +10,10 @@ class TaskDeleteRepository implements TaskDeleteRepositoryInterface
     public function deleteRepo(int $id): bool
     {
         $task = Task::find($id);
-        if (!$task) {
+        if (! $task) {
             return false;
         }
+
         return (bool) $task->delete();
     }
 }

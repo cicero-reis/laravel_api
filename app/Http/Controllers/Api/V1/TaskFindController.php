@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Core\Task\UseCases\Interfaces\TaskFindUseCaseInterface;
+use App\Exceptions\MensagemDetailsException;
+use App\Exceptions\NotFoundException;
 use App\Http\Resources\TaskResource;
 use Illuminate\Http\JsonResponse;
-use App\Exceptions\NotFoundException;
-use App\Exceptions\MensagemDetailsException;
 
 class TaskFindController
 {
@@ -30,9 +30,10 @@ class TaskFindController
             $result = new TaskResource($task);
 
             return new JsonResponse($result, 200);
-            
+
         } catch (NotFoundException $e) {
             $message = new MensagemDetailsException($e->getMessage(), 'error', 404);
+
             return new JsonResponse($message->toArray(), 404);
         } catch (\Exception $e) {
             return new JsonResponse(['error' => 'An error occurred while fetching tasks'], 500);

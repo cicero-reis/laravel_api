@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
-use App\Core\Task\UseCases\TaskDeleteUseCase;
 use App\Core\Task\Repositories\Interfaces\TaskDeleteRepositoryInterface;
+use App\Core\Task\UseCases\TaskDeleteUseCase;
+use PHPUnit\Framework\TestCase;
 
 class TaskDeleteUseCaseInterfaceTest extends TestCase
 {

@@ -14,7 +14,7 @@ class TaskCreateDTO
     public function toArray(): array
     {
         return [
-            'name' => $this->name
+            'name' => $this->name,
         ];
     }
 }

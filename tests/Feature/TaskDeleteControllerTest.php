@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\Models\Task;
 
 class TaskDeleteControllerTest extends TestCase
 {
@@ -28,9 +28,9 @@ class TaskDeleteControllerTest extends TestCase
         // Assert: check response
         $response->assertStatus(404);
         $response->assertJson([
-            "message" => "No tasks found",
-            "details" => "error",
-            "code" => 404
+            'message' => 'No tasks found',
+            'details' => 'error',
+            'code' => 404,
         ]);
     }
 }

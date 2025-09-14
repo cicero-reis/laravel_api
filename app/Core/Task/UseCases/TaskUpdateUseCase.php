@@ -2,9 +2,9 @@
 
 namespace App\Core\Task\UseCases;
 
+use App\Core\Task\DTO\TaskUpdateDTO;
 use App\Core\Task\Repositories\Interfaces\TaskUpdateRepositoryInterface;
 use App\Core\Task\UseCases\Interfaces\TaskUpdateUseCaseInterface;
-use App\Core\Task\DTO\TaskUpdateDTO;
 use App\Models\Task;
 
 class TaskUpdateUseCase implements TaskUpdateUseCaseInterface
@@ -18,4 +18,3 @@ class TaskUpdateUseCase implements TaskUpdateUseCaseInterface
         return $this->repo->updateRepo($dto);
     }
 }
-

@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\V1\TaskListController;
-use App\Http\Controllers\Api\V1\TaskFindController;
-use App\Http\Controllers\Api\V1\TaskDeleteController;
 use App\Http\Controllers\Api\V1\TaskCreateController;
+use App\Http\Controllers\Api\V1\TaskDeleteController;
+use App\Http\Controllers\Api\V1\TaskFindController;
+use App\Http\Controllers\Api\V1\TaskListController;
 use App\Http\Controllers\Api\V1\TaskUpdateController;
 use App\Http\Controllers\Api\V1\TaskUpdateIsCompletedController;
 use Illuminate\Http\Request;

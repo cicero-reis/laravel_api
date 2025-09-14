@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Core\Task\UseCases\Interfaces\TaskUpdateIsCompletedUseCaseInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Core\Task\DTO\TaskUpdateIsCompletedDTO;
-use App\Http\Resources\TaskResource;
-use App\Http\Requests\TaskUpdateIsCompletedRequest;
-use App\Exceptions\NotFoundException;
+use App\Core\Task\UseCases\Interfaces\TaskUpdateIsCompletedUseCaseInterface;
 use App\Exceptions\MensagemDetailsException;
+use App\Exceptions\NotFoundException;
+use App\Http\Requests\TaskUpdateIsCompletedRequest;
+use App\Http\Resources\TaskResource;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TaskUpdateIsCompletedController
 {
@@ -17,8 +17,8 @@ class TaskUpdateIsCompletedController
     public function __construct(TaskUpdateIsCompletedUseCaseInterface $useCase)
     {
         $this->useCase = $useCase;
-    }   
-    
+    }
+
     public function __invoke(TaskUpdateIsCompletedRequest $request, int $id): JsonResponse
     {
         try {
@@ -29,14 +29,16 @@ class TaskUpdateIsCompletedController
 
             $task = $this->useCase->execute($dto);
 
-            if (!$task) {
+            if (! $task) {
                 throw new NotFoundException('No tasks found', null, 404);
             }
 
             $result = new TaskResource($task);
+
             return new JsonResponse($result, 200);
         } catch (NotFoundException $e) {
             $message = new MensagemDetailsException($e->getMessage(), 'error', 404);
+
             return new JsonResponse($message->toArray(), 404);
         } catch (\Exception $e) {
             return new JsonResponse(['error' => 'An error occurred while fetching tasks'], 500);

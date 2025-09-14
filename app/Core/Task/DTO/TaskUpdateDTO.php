@@ -5,6 +5,7 @@ namespace App\Core\Task\DTO;
 class TaskUpdateDTO
 {
     public int $id;
+
     public string $name;
 
     public function __construct(int $id, string $name)
@@ -17,7 +18,7 @@ class TaskUpdateDTO
     {
         return [
             'id' => $this->id,
-            'name' => $this->name
+            'name' => $this->name,
         ];
     }
 }

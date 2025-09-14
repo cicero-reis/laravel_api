@@ -5,6 +5,7 @@ namespace App\Core\Task\DTO;
 class TaskUpdateIsCompletedDTO
 {
     public int $id;
+
     public string $is_completed;
 
     public function __construct(int $id, int $isCompleted)
@@ -17,7 +18,7 @@ class TaskUpdateIsCompletedDTO
     {
         return [
             'id' => $this->id,
-            'is_completed' => $this->is_completed
+            'is_completed' => $this->is_completed,
         ];
     }
 }

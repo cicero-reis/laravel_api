@@ -11,11 +11,12 @@ class TaskUpdateIsCompletedRepository implements TaskUpdateIsCompletedRepository
     public function updateIsCompletedRepo(TaskUpdateIsCompletedDTO $dto): ?Task
     {
         $task = Task::find($dto->id);
-        if (!$task) {
+        if (! $task) {
             return null;
         }
         $task->is_completed = $dto->is_completed;
         $task->save();
+
         return $task;
     }
 }

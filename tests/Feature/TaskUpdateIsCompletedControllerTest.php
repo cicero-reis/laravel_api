@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\Models\Task;
 
 class TaskUpdateIsCompletedControllerTest extends TestCase
 {
@@ -15,7 +15,7 @@ class TaskUpdateIsCompletedControllerTest extends TestCase
         $task = Task::factory()->create();
 
         $response = $this->patchJson("/api/v1/tasks/{$task->id}", [
-            'is_completed' => 1
+            'is_completed' => 1,
         ]);
 
         $response->assertStatus(200);
@@ -24,7 +24,7 @@ class TaskUpdateIsCompletedControllerTest extends TestCase
             'id',
             'name',
             'is_completed',
-            'created_at'
+            'created_at',
         ]);
     }
 
@@ -33,7 +33,7 @@ class TaskUpdateIsCompletedControllerTest extends TestCase
         $task = Task::factory()->create();
 
         $response = $this->patchJson("/api/v1/tasks/{$task->id}", [
-            'is_completed' => 10
+            'is_completed' => 10,
         ]);
 
         $response->assertStatus(422);

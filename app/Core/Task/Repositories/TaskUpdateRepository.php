@@ -2,9 +2,9 @@
 
 namespace App\Core\Task\Repositories;
 
+use App\Core\Task\DTO\TaskUpdateDTO;
 use App\Core\Task\Repositories\Interfaces\TaskUpdateRepositoryInterface;
 use App\Models\Task;
-use App\Core\Task\DTO\TaskUpdateDTO;
 
 class TaskUpdateRepository implements TaskUpdateRepositoryInterface
 {
@@ -13,8 +13,10 @@ class TaskUpdateRepository implements TaskUpdateRepositoryInterface
         $task = Task::find($dto->id);
         if ($task) {
             $task->update($dto->toArray());
+
             return $task;
         }
-        return null;        
-    }    
+
+        return null;
+    }
 }

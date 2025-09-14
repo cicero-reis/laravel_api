@@ -16,7 +16,7 @@ class TaskFindControllerTest extends TestCase
         $task = Task::factory()->create();
 
         // Act: call the endpoint buscando pelo id
-        $response = $this->getJson('/api/v1/tasks/' . $task->id);
+        $response = $this->getJson('/api/v1/tasks/'.$task->id);
 
         // Assert: check response
         $response->assertStatus(200);
@@ -24,7 +24,7 @@ class TaskFindControllerTest extends TestCase
             'id',
             'name',
             'is_completed',
-            'created_at'
+            'created_at',
         ]);
         $response->assertJson([
             'id' => $task->id,
@@ -42,9 +42,9 @@ class TaskFindControllerTest extends TestCase
         // Assert: check response
         $response->assertStatus(404);
         $response->assertJson([
-            "message" => "No tasks found",
-            "details" => "error",
-            "code" => 404
+            'message' => 'No tasks found',
+            'details' => 'error',
+            'code' => 404,
         ]);
     }
 }

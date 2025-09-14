@@ -35,9 +35,9 @@ class TaskListControllerTest extends TestCase
         // Assert: check response
         $response->assertStatus(404);
         $response->assertJson([
-            "message" => "No tasks found",
-            "details" => "error",
-            "code" => 404
+            'message' => 'No tasks found',
+            'details' => 'error',
+            'code' => 404,
         ]);
     }
 }

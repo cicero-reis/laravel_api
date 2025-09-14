@@ -2,15 +2,15 @@
 
 namespace Tests\Unit\Core\Task\UseCases;
 
-use PHPUnit\Framework\TestCase;
-use App\Core\Task\UseCases\TaskCreateUseCase;
-use App\Core\Task\Repositories\Interfaces\TaskCreateRepositoryInterface;
 use App\Core\Task\DTO\TaskCreateDTO;
+use App\Core\Task\Repositories\Interfaces\TaskCreateRepositoryInterface;
+use App\Core\Task\UseCases\TaskCreateUseCase;
 use App\Models\Task;
+use PHPUnit\Framework\TestCase;
 
 class TaskCreateUseCaseTest extends TestCase
 {
-    public function testExecuteReturnsTaskOnSuccess()
+    public function test_execute_returns_task_on_success()
     {
         $mockRepo = $this->createMock(TaskCreateRepositoryInterface::class);
         $dto = $this->createMock(TaskCreateDTO::class);
@@ -27,7 +27,7 @@ class TaskCreateUseCaseTest extends TestCase
         $this->assertSame($expectedTask, $result);
     }
 
-    public function testExecuteReturnsNullOnFailure()
+    public function test_execute_returns_null_on_failure()
     {
         $mockRepo = $this->createMock(TaskCreateRepositoryInterface::class);
         $dto = $this->createMock(TaskCreateDTO::class);

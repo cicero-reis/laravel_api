@@ -22,7 +22,7 @@ class TaskUpdateIsCompletedRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'is_completed' => 'required|in:0,1'
+            'is_completed' => 'required|in:0,1',
         ];
     }
 }

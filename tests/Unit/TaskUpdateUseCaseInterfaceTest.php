@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Core\Task\UseCases\Interfaces;
 
-use PHPUnit\Framework\TestCase;
-use App\Core\Task\UseCases\Interfaces\TaskUpdateUseCaseInterface;
 use App\Core\Task\DTO\TaskUpdateDTO;
+use App\Core\Task\UseCases\Interfaces\TaskUpdateUseCaseInterface;
+use PHPUnit\Framework\TestCase;
 
 class TaskUpdateUseCaseInterfaceTest extends TestCase
 {

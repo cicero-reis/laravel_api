@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Core\Task\UseCases\Interfaces\TaskCreateUseCaseInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Http\Requests\StoreTaskRequest;
 use App\Core\Task\DTO\TaskCreateDTO;
-use App\Http\Resources\TaskResource;
-use App\Exceptions\NotFoundException;
+use App\Core\Task\UseCases\Interfaces\TaskCreateUseCaseInterface;
 use App\Exceptions\MensagemDetailsException;
+use App\Exceptions\NotFoundException;
+use App\Http\Requests\StoreTaskRequest;
+use App\Http\Resources\TaskResource;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class TaskCreateController
 {
@@ -17,8 +17,8 @@ class TaskCreateController
     public function __construct(TaskCreateUseCaseInterface $useCase)
     {
         $this->useCase = $useCase;
-    }   
-    
+    }
+
     public function __invoke(StoreTaskRequest $request): JsonResponse
     {
         try {
@@ -26,13 +26,15 @@ class TaskCreateController
                 $request->input('name')
             );
             $task = $this->useCase->execute($dto);
-            if (!$task) {
+            if (! $task) {
                 throw new NotFoundException('No tasks found', null, 400);
             }
             $result = new TaskResource($task);
+
             return new JsonResponse($result, 201);
         } catch (NotFoundException $e) {
             $message = new MensagemDetailsException($e->getMessage(), 'error', 400);
+
             return new JsonResponse($message->toArray(), 400);
         } catch (\Exception $e) {
             return new JsonResponse(['error' => 'An error occurred while fetching tasks'], 500);
