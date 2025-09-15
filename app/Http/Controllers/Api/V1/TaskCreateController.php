@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Core\Task\DTO\TaskCreateDTO;
+use App\Core\Task\DTO\Factories\TaskCreateDTOFactory;
 use App\Core\Task\UseCases\Interfaces\TaskCreateUseCaseInterface;
-use App\Exceptions\MensagemDetailsException;
 use App\Exceptions\NotFoundException;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Resources\TaskResource;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Exceptions\Factory\MensagemDetailsExceptionFactory;
 
 class TaskCreateController
 {
@@ -22,9 +22,11 @@ class TaskCreateController
     public function __invoke(StoreTaskRequest $request): JsonResponse
     {
         try {
-            $dto = new TaskCreateDTO(
-                $request->input('name')
-            );
+            
+            $dto = TaskCreateDTOFactory::createFromArray([
+                        'name' => $request->input('name')
+                    ]);
+
             $task = $this->useCase->execute($dto);
             if (! $task) {
                 throw new NotFoundException('No tasks found', null, 400);
@@ -33,8 +35,7 @@ class TaskCreateController
 
             return new JsonResponse($result, 201);
         } catch (NotFoundException $e) {
-            $message = new MensagemDetailsException($e->getMessage(), 'error', 400);
-
+            $message = MensagemDetailsExceptionFactory::create($e->getMessage(), 'error', 404);
             return new JsonResponse($message->toArray(), 400);
         } catch (\Exception $e) {
             return new JsonResponse(['error' => 'An error occurred while fetching tasks'], 500);
