@@ -4,6 +4,8 @@ use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 use Monolog\Processor\PsrLogMessageProcessor;
+use App\Logging\CloudWatchHandler;
+use Aws\CloudWatchLogs\CloudWatchLogsClient;
 
 return [
 
@@ -127,6 +129,24 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
+        'cloudwatch' => [
+            'driver' => 'monolog',
+            'handler' => CloudWatchHandler::class,
+            'handler_with' => [
+                'client' => new CloudWatchLogsClient([
+                    'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+                    'version' => 'latest',
+                    'endpoint' => env('AWS_CLOUDWATCH_ENDPOINT', 'http://localhost:4566'),
+                    'credentials' => [
+                        'key' => 'test',
+                        'secret' => 'test',
+                    ],
+                ]),
+                'logGroup' => env('AWS_CLOUDWATCH_LOG_GROUP', 'task_log_group'),
+                'logStream' => env('AWS_CLOUDWATCH_LOG_STREAM', 'task_log_stream'),
+            ],
+            'level' => 'debug',
+        ],
     ],
 
 ];

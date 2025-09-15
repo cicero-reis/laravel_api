@@ -59,3 +59,17 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Estrutura e Padrões de Projeto
+
+Este projeto utiliza diversos padrões de projeto para garantir organização, escalabilidade e facilidade de manutenção:
+
+- **MVC (Model-View-Controller):** Estrutura principal do Laravel, separando lógica de negócio (Models), apresentação (Views) e controle de fluxo (Controllers).
+- **Repository:** Abstrai o acesso a dados, facilitando testes e mudanças na fonte de dados sem alterar a lógica de negócio.
+- **Service:** Centraliza regras de negócio complexas, promovendo reutilização e separação de responsabilidades.
+- **Factory:** Utilizado para criação de objetos em testes e seeders, facilitando geração de dados fictícios.
+- **Policy:** Gerencia regras de autorização, garantindo controle de acesso granular a recursos da API.
+- **Exception Handling:** Implementação de exceções customizadas para tratamento consistente de erros.
+- **Seeder & Migration:** Automatizam criação e povoamento do banco de dados, facilitando setup e versionamento.
+
+Esses padrões tornam o código mais limpo, testável e preparado para evoluções futuras.

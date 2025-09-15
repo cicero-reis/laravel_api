@@ -10,10 +10,12 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "aws/aws-sdk-php": "^3.356",
         "laravel/framework": "^12.0",
         "laravel/octane": "^2.12",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
+        "maxbanton/cwh": "*",
         "spiral/roadrunner-cli": "^2.6.0",
         "spiral/roadrunner-http": "^3.3.0"
     },
