@@ -39,7 +39,7 @@ class TaskListController
         } catch (\Exception $e) {
             return new JsonResponse(['error' => 'An error occurred while fetching tasks'], 500);
         } catch (\Throwable $e) {
-            return new JsonResponse(['error' => 'A critical error occurred'], 500);
+            return new JsonResponse(['error' => $e->getMessage()], 500);
         }
     }
 }
