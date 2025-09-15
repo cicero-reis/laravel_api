@@ -2,12 +2,12 @@
 
 namespace App\Core\Task\Repositories;
 
-use App\Models\Task;
 use App\Core\Task\Repositories\Interfaces\TaskListRepositoryInterface;
-use Illuminate\Pipeline\Pipeline;
-use App\Core\Task\Repositories\Pipelines\Filters\TaskNameFilter;
-use App\Core\Task\Repositories\Pipelines\Filters\TaskIsCompletedFilter;
 use App\Core\Task\Repositories\Pipelines\Filters\TaskCreatedAtFilter;
+use App\Core\Task\Repositories\Pipelines\Filters\TaskIsCompletedFilter;
+use App\Core\Task\Repositories\Pipelines\Filters\TaskNameFilter;
+use App\Models\Task;
+use Illuminate\Pipeline\Pipeline;
 
 class TaskListRepository implements TaskListRepositoryInterface
 {

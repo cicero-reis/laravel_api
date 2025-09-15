@@ -2,8 +2,8 @@
 
 namespace App\Core\Task\Repositories\Pipelines\Filters;
 
-use Closure;
 use Carbon\Carbon;
+use Closure;
 
 class TaskCreatedAtFilter
 {
