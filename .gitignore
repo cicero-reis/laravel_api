@@ -26,7 +26,7 @@ rr
 .rr.yaml
 supervisord.log
 supervisord.pid
-.terraform
+.terraform/
 .terraform.lock.hcl
 *.tfstate
 *.tfstate.backup
