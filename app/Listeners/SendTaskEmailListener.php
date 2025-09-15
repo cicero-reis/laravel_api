@@ -3,9 +3,9 @@
 namespace App\Listeners;
 
 use App\Events\TaskRegisteredEvent;
+use App\Mail\TaskMail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\TaskMail;
 
 class SendTaskEmailListener implements ShouldQueue
 {

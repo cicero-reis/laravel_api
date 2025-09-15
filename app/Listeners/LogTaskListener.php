@@ -22,8 +22,8 @@ class LogTaskListener implements ShouldQueue
     public function handle(TaskRegisteredEvent $event): void
     {
         Log::channel('cloudwatch')->info('Task criada com sucesso', [
-            'task_id' => $event->task->id, 
-            'task_name' => $event->task->name
+            'task_id' => $event->task->id,
+            'task_name' => $event->task->name,
         ]);
     }
 }

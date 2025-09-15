@@ -13,7 +13,7 @@ class EventServiceProvider extends ServiceProvider
         TaskRegisteredEvent::class => [
             SendTaskEmailListener::class,
             LogTaskListener::class,
-        ]
+        ],
     ];
 
     /**

@@ -2,14 +2,16 @@
 
 namespace App\Logging;
 
+use Aws\CloudWatchLogs\CloudWatchLogsClient;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\LogRecord;
-use Aws\CloudWatchLogs\CloudWatchLogsClient;
 
 class CloudWatchHandler extends AbstractProcessingHandler
 {
     protected CloudWatchLogsClient $client;
+
     protected string $logGroup;
+
     protected string $logStream;
 
     public function __construct(

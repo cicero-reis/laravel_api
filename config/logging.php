@@ -1,11 +1,11 @@
 <?php
 
+use App\Logging\CloudWatchHandler;
+use Aws\CloudWatchLogs\CloudWatchLogsClient;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 use Monolog\Processor\PsrLogMessageProcessor;
-use App\Logging\CloudWatchHandler;
-use Aws\CloudWatchLogs\CloudWatchLogsClient;
 
 return [
 
