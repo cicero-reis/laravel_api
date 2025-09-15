@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Core\Task\UseCases\Interfaces\TaskFindUseCaseInterface;
-use App\Exceptions\NotFoundException;
 use App\Exceptions\Factory\MensagemDetailsExceptionFactory;
+use App\Exceptions\NotFoundException;
 use App\Http\Resources\TaskResource;
 use Illuminate\Http\JsonResponse;
 
@@ -33,6 +33,7 @@ class TaskFindController
 
         } catch (NotFoundException $e) {
             $message = MensagemDetailsExceptionFactory::create($e->getMessage(), 'error', 404);
+
             return new JsonResponse($message->toArray(), 404);
         } catch (\Exception $e) {
             return new JsonResponse(['error' => 'An error occurred while fetching tasks'], 500);

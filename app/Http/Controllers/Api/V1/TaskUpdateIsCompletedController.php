@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Core\Task\DTO\Factories\TaskUpdateIsCompletedDTOFactory;
 use App\Core\Task\UseCases\Interfaces\TaskUpdateIsCompletedUseCaseInterface;
+use App\Exceptions\Factory\MensagemDetailsExceptionFactory;
 use App\Exceptions\NotFoundException;
 use App\Http\Requests\TaskUpdateIsCompletedRequest;
 use App\Http\Resources\TaskResource;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Exceptions\Factory\MensagemDetailsExceptionFactory;
 
 class TaskUpdateIsCompletedController
 {
@@ -23,9 +23,9 @@ class TaskUpdateIsCompletedController
     {
         try {
             $dto = TaskUpdateIsCompletedDTOFactory::updateIsCompletedFromArray([
-                    'id' => $id,
-                    'is_completed' => $request->input('is_completed')
-                ]);
+                'id' => $id,
+                'is_completed' => $request->input('is_completed'),
+            ]);
 
             $task = $this->useCase->execute($dto);
 
@@ -38,6 +38,7 @@ class TaskUpdateIsCompletedController
             return new JsonResponse($result, 200);
         } catch (NotFoundException $e) {
             $message = MensagemDetailsExceptionFactory::create($e->getMessage(), 'error', 404);
+
             return new JsonResponse($message->toArray(), 404);
         } catch (\Exception $e) {
             return new JsonResponse(['error' => 'An error occurred while fetching tasks'], 500);

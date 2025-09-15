@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Core\Task\UseCases\Interfaces\TaskListUseCaseInterface;
+use App\Exceptions\Factory\MensagemDetailsExceptionFactory;
 use App\Exceptions\NotFoundException;
 use App\Http\Resources\TaskResourceCollection;
 use Illuminate\Http\JsonResponse;
-use App\Exceptions\Factory\MensagemDetailsExceptionFactory;
 
 class TaskListController
 {
@@ -34,6 +34,7 @@ class TaskListController
             return new JsonResponse($tasksCollection, 200);
         } catch (NotFoundException $e) {
             $message = MensagemDetailsExceptionFactory::create($e->getMessage(), 'error', 404);
+
             return new JsonResponse($message->toArray(), 404);
         } catch (\Exception $e) {
             return new JsonResponse(['error' => 'An error occurred while fetching tasks'], 500);
