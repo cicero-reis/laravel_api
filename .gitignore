@@ -24,3 +24,12 @@ Homestead.yaml
 Thumbs.db
 rr
 .rr.yaml
+supervisord.log
+supervisord.pid
+.terraform
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+.terraformrc
+terraform.rc
+*.iml
