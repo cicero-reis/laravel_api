@@ -2,12 +2,12 @@
 
 namespace App\Core\User\Repositories;
 
-use App\Models\User;
 use App\Core\User\Repositories\Interfaces\UserListRepositoryInterface;
-use Illuminate\Pipeline\Pipeline;
 use App\Core\User\Repositories\Pipelines\Filters\UserCreatedAtFilter;
 use App\Core\User\Repositories\Pipelines\Filters\UserEmailFilter;
 use App\Core\User\Repositories\Pipelines\Filters\UserNameFilter;
+use App\Models\User;
+use Illuminate\Pipeline\Pipeline;
 
 class UserListRepository implements UserListRepositoryInterface
 {

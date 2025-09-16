@@ -13,7 +13,7 @@ class UserCreateControllerTest extends TestCase
     {
         $payload = [
             'name' => 'User Name',
-            'email' => 'user@gmail.com'
+            'email' => 'user@gmail.com',
         ];
 
         $response = $this->postJson('/api/v1/users', $payload);
@@ -28,7 +28,7 @@ class UserCreateControllerTest extends TestCase
 
         $this->assertDatabaseHas('users', [
             'name' => 'User Name',
-            'email' => 'user@gmail.com'
+            'email' => 'user@gmail.com',
         ]);
     }
 

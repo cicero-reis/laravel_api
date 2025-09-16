@@ -19,4 +19,3 @@ class UserDeleteUseCase implements UserDeleteUseCaseInterface
         return $this->repo->deleteRepo($id);
     }
 }
-

@@ -17,12 +17,12 @@ class UserListControllerTest extends TestCase
         $response = $this->getJson('/api/v1/users');
 
         $response->assertStatus(200);
-        
+
         $response->assertJsonStructure([
             'data',
             'meta',
         ]);
-        
+
         $this->assertCount(3, $response->json('data'));
     }
 
@@ -38,4 +38,3 @@ class UserListControllerTest extends TestCase
         ]);
     }
 }
-

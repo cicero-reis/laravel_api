@@ -8,4 +8,3 @@ interface UserFindRepositoryInterface
 {
     public function findRepo(int $id): ?User;
 }
-

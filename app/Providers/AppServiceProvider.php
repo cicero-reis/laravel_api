@@ -65,7 +65,7 @@ class AppServiceProvider extends ServiceProvider
             \App\Core\Task\UseCases\TaskUpdateIsCompletedUseCase::class
         );
 
-        # User Repository Bindings
+        // User Repository Bindings
         $this->app->bind(
             \App\Core\User\Repositories\Interfaces\UserCreateRepositoryInterface::class,
             \App\Core\User\Repositories\UserCreateRepository::class
@@ -87,7 +87,7 @@ class AppServiceProvider extends ServiceProvider
             \App\Core\User\Repositories\UserDeleteRepository::class
         );
 
-        # User Use Case Bindings
+        // User Use Case Bindings
         $this->app->bind(
             \App\Core\User\UseCases\Interfaces\UserCreateUseCaseInterface::class,
             \App\Core\User\UseCases\UserCreateUseCase::class

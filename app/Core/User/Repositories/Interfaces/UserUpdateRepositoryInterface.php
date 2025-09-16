@@ -2,8 +2,8 @@
 
 namespace App\Core\User\Repositories\Interfaces;
 
-use App\Models\User;
 use App\Core\User\DTO\UserUpdateDTO;
+use App\Models\User;
 
 interface UserUpdateRepositoryInterface
 {

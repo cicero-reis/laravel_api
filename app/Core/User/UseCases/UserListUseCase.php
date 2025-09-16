@@ -2,9 +2,8 @@
 
 namespace App\Core\User\UseCases;
 
-use App\Core\User\UseCases\Interfaces\UserListUseCaseInterface;
 use App\Core\User\Repositories\Interfaces\UserListRepositoryInterface;
-use App\Models\User;
+use App\Core\User\UseCases\Interfaces\UserListUseCaseInterface;
 
 class UserListUseCase implements UserListUseCaseInterface
 {
@@ -20,4 +19,3 @@ class UserListUseCase implements UserListUseCaseInterface
         return $this->repo->listRepo($filters, $paginate);
     }
 }
-

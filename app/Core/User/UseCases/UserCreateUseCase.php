@@ -14,10 +14,10 @@ class UserCreateUseCase implements UserCreateUseCaseInterface
     public function __construct(UserCreateRepositoryInterface $repo)
     {
         $this->repo = $repo;
-    }   
+    }
 
     public function execute(UserCreateDTO $dto): ?User
     {
-        return $this->repo->createRepo($dto);    
+        return $this->repo->createRepo($dto);
     }
 }

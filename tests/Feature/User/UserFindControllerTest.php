@@ -14,7 +14,7 @@ class UserFindControllerTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->getJson('/api/v1/users/' . $user->id);
+        $response = $this->getJson('/api/v1/users/'.$user->id);
 
         $response->assertStatus(200);
         $response->assertJsonStructure([

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 class UserCreateDTO
 {
     public string $name;
+
     public string $email;
 
     public function __construct(string $name, string $email)
@@ -20,7 +21,7 @@ class UserCreateDTO
         return [
             'name' => $this->name,
             'email' => $this->email,
-            'password' => Hash::make('password')
+            'password' => Hash::make('password'),
         ];
     }
 }

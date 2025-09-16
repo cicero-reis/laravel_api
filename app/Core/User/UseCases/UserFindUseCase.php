@@ -2,8 +2,8 @@
 
 namespace App\Core\User\UseCases;
 
-use App\Core\User\UseCases\Interfaces\UserFindUseCaseInterface;
 use App\Core\User\Repositories\Interfaces\UserFindRepositoryInterface;
+use App\Core\User\UseCases\Interfaces\UserFindUseCaseInterface;
 use App\Models\User;
 
 class UserFindUseCase implements UserFindUseCaseInterface

@@ -2,8 +2,8 @@
 
 namespace App\Core\User\Repositories;
 
-use App\Models\User;
 use App\Core\User\Repositories\Interfaces\UserDeleteRepositoryInterface;
+use App\Models\User;
 
 class UserDeleteRepository implements UserDeleteRepositoryInterface
 {
@@ -13,6 +13,7 @@ class UserDeleteRepository implements UserDeleteRepositoryInterface
         if ($user) {
             return (bool) $user->delete();
         }
+
         return false;
     }
 }

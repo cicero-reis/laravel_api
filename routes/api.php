@@ -3,18 +3,18 @@
 // API Routes
 
 // User Controllers
-use App\Http\Controllers\Api\V1\User\UserCreateController;
-use App\Http\Controllers\Api\V1\User\UserDeleteController;
-use App\Http\Controllers\Api\V1\User\UserFindController;
-use App\Http\Controllers\Api\V1\User\UserListController;
-use App\Http\Controllers\Api\V1\User\UserUpdateController;
-// Task Controllers
 use App\Http\Controllers\Api\V1\Task\TaskCreateController;
 use App\Http\Controllers\Api\V1\Task\TaskDeleteController;
 use App\Http\Controllers\Api\V1\Task\TaskFindController;
 use App\Http\Controllers\Api\V1\Task\TaskListController;
 use App\Http\Controllers\Api\V1\Task\TaskUpdateController;
+// Task Controllers
 use App\Http\Controllers\Api\V1\Task\TaskUpdateIsCompletedController;
+use App\Http\Controllers\Api\V1\User\UserCreateController;
+use App\Http\Controllers\Api\V1\User\UserDeleteController;
+use App\Http\Controllers\Api\V1\User\UserFindController;
+use App\Http\Controllers\Api\V1\User\UserListController;
+use App\Http\Controllers\Api\V1\User\UserUpdateController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +23,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::prefix('v1')->group(function () {
-    
+
     // User routes
     Route::get('/users', UserListController::class);
     Route::get('/users/{id}', UserFindController::class);

@@ -2,9 +2,9 @@
 
 namespace App\Core\User\Repositories;
 
-use App\Models\User;
 use App\Core\User\DTO\UserCreateDTO;
 use App\Core\User\Repositories\Interfaces\UserCreateRepositoryInterface;
+use App\Models\User;
 
 class UserCreateRepository implements UserCreateRepositoryInterface
 {

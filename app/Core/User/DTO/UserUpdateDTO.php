@@ -5,7 +5,9 @@ namespace App\Core\User\DTO;
 class UserUpdateDTO
 {
     public int $id;
+
     public string $name;
+
     public string $email;
 
     public function __construct(int $id, string $name, string $email)
@@ -20,7 +22,7 @@ class UserUpdateDTO
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'email' => $this->email
+            'email' => $this->email,
         ];
     }
 }
