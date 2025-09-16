@@ -34,16 +34,19 @@ class UserFindController
 
         } catch (NotFoundException $e) {
             $message = MensagemDetailsExceptionFactory::create($e->getMessage(), 'error', 404);
+
             return new JsonResponse($message->toArray(), 404);
         } catch (\Exception $e) {
             Log::channel('cloudwatch')->info('UserFindController', [
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ]);
+
             return new JsonResponse(['error' => 'An error occurred while fetching user'], 500);
         } catch (\Throwable $e) {
             Log::channel('cloudwatch')->info('UserFindController', [
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ]);
+
             return new JsonResponse(['error' => 'A critical error occurred'], 500);
         }
     }
