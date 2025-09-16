@@ -12,7 +12,7 @@ class UserRegisteredEvent
     use Dispatchable, SerializesModels;
 
     public User $user;
-    
+
     /**
      * Create a new event instance.
      */
