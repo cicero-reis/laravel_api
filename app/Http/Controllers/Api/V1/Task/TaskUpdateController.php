@@ -9,6 +9,7 @@ use App\Exceptions\NotFoundException;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Http\Resources\TaskResource;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
 class TaskUpdateController
 {
@@ -38,11 +39,16 @@ class TaskUpdateController
             return new JsonResponse($result, 200);
         } catch (NotFoundException $e) {
             $message = MensagemDetailsExceptionFactory::create($e->getMessage(), 'error', 404);
-
             return new JsonResponse($message->toArray(), 404);
         } catch (\Exception $e) {
+            Log::channel('cloudwatch')->info('TaskUpdateController', [
+                'error' => $e->getMessage()
+            ]);
             return new JsonResponse(['error' => $e->getMessage()], 500);
         } catch (\Throwable $e) {
+            Log::channel('cloudwatch')->info('TaskUpdateController', [
+                'error' => $e->getMessage()
+            ]);
             return new JsonResponse(['error' => 'A critical error occurred'], 500);
         }
     }

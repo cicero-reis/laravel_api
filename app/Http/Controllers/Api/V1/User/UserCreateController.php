@@ -9,6 +9,7 @@ use App\Exceptions\NotFoundException;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Resources\UserResource;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
 class UserCreateController
 {
@@ -37,11 +38,16 @@ class UserCreateController
             return new JsonResponse($result, 201);
         } catch (NotFoundException $e) {
             $message = MensagemDetailsExceptionFactory::create($e->getMessage(), 'error', 404);
-
             return new JsonResponse($message->toArray(), 400);
         } catch (\Exception $e) {
+            Log::channel('cloudwatch')->info('UserCreateController', [
+                'error' => $e->getMessage()
+            ]);
             return new JsonResponse(['error' => 'An error occurred while fetching user'], 500);
         } catch (\Throwable $e) {
+            Log::channel('cloudwatch')->info('UserCreateController', [
+                'error' => $e->getMessage()
+            ]);
             return new JsonResponse(['error' => 'A critical error occurred'], 500);
         }
     }

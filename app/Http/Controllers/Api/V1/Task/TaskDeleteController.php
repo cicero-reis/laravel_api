@@ -6,6 +6,7 @@ use App\Core\Task\UseCases\Interfaces\TaskDeleteUseCaseInterface;
 use App\Exceptions\Factory\MensagemDetailsExceptionFactory;
 use App\Exceptions\NotFoundException;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
 class TaskDeleteController
 {
@@ -23,16 +24,21 @@ class TaskDeleteController
             if (! $deleted) {
                 throw new NotFoundException('No tasks found', 404);
             }
-
             return new JsonResponse(null, 204);
         } catch (NotFoundException $e) {
             $message = MensagemDetailsExceptionFactory::create($e->getMessage(), 'error', 404);
-
             return new JsonResponse($message->toArray(), 404);
         } catch (\Exception $e) {
+            Log::channel('cloudwatch')->info('TaskDeleteController', [
+                'error' => $e->getMessage()
+            ]);
             return new JsonResponse(['error' => 'An error occurred while fetching tasks'], 500);
         } catch (\Throwable $e) {
+            Log::channel('cloudwatch')->info('TaskDeleteController', [
+                'error' => $e->getMessage()
+            ]);
             return new JsonResponse(['error' => 'A critical error occurred'], 500);
         }
     }
 }
+
