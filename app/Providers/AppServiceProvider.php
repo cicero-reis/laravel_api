@@ -64,6 +64,50 @@ class AppServiceProvider extends ServiceProvider
             \App\Core\Task\UseCases\Interfaces\TaskUpdateIsCompletedUseCaseInterface::class,
             \App\Core\Task\UseCases\TaskUpdateIsCompletedUseCase::class
         );
+
+        # User Repository Bindings
+        $this->app->bind(
+            \App\Core\User\Repositories\Interfaces\UserCreateRepositoryInterface::class,
+            \App\Core\User\Repositories\UserCreateRepository::class
+        );
+        $this->app->bind(
+            \App\Core\User\Repositories\Interfaces\UserFindRepositoryInterface::class,
+            \App\Core\User\Repositories\UserFindRepository::class
+        );
+        $this->app->bind(
+            \App\Core\User\Repositories\Interfaces\UserListRepositoryInterface::class,
+            \App\Core\User\Repositories\UserListRepository::class
+        );
+        $this->app->bind(
+            \App\Core\User\Repositories\Interfaces\UserUpdateRepositoryInterface::class,
+            \App\Core\User\Repositories\UserUpdateRepository::class
+        );
+        $this->app->bind(
+            \App\Core\User\Repositories\Interfaces\UserDeleteRepositoryInterface::class,
+            \App\Core\User\Repositories\UserDeleteRepository::class
+        );
+
+        # User Use Case Bindings
+        $this->app->bind(
+            \App\Core\User\UseCases\Interfaces\UserCreateUseCaseInterface::class,
+            \App\Core\User\UseCases\UserCreateUseCase::class
+        );
+        $this->app->bind(
+            \App\Core\User\UseCases\Interfaces\UserFindUseCaseInterface::class,
+            \App\Core\User\UseCases\UserFindUseCase::class
+        );
+        $this->app->bind(
+            \App\Core\User\UseCases\Interfaces\UserListUseCaseInterface::class,
+            \App\Core\User\UseCases\UserListUseCase::class
+        );
+        $this->app->bind(
+            \App\Core\User\UseCases\Interfaces\UserUpdateUseCaseInterface::class,
+            \App\Core\User\UseCases\UserUpdateUseCase::class
+        );
+        $this->app->bind(
+            \App\Core\User\UseCases\Interfaces\UserDeleteUseCaseInterface::class,
+            \App\Core\User\UseCases\UserDeleteUseCase::class
+        );
     }
 
     /**
