@@ -3,8 +3,10 @@
 namespace Tests\Feature\Task;
 
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Gate;
 
 class TaskFindControllerTest extends TestCase
 {
@@ -15,18 +17,21 @@ class TaskFindControllerTest extends TestCase
         parent::setUp();
 
         $this->withoutMiddleware();
+
+        Gate::shouldReceive('authorize')->andReturn(true);
     }
 
     public function test_show_returns_task_by_id()
     {
-        // Arrange: create a task
+        $user = User::factory()->create();
         $task = Task::factory()->create();
 
-        // Act: call the endpoint buscando pelo id
-        $response = $this->getJson('/api/v1/tasks/'.$task->id);
+        $response = $this
+                        ->actingAs($user)
+                        ->getJson('/api/v1/tasks/'.$task->id);
 
-        // Assert: check response
         $response->assertStatus(200);
+        
         $response->assertJsonStructure([
             'id',
             'name',
@@ -43,11 +48,13 @@ class TaskFindControllerTest extends TestCase
 
     public function test_show_returns_404_when_no_task_found()
     {
-        // Act: call the endpoint buscando uma tarefa inexistente
-        $response = $this->getJson('/api/v1/tasks/999');
+        $user = User::factory()->create();
+        $response = $this
+                        ->actingAs($user)
+                        ->getJson('/api/v1/tasks/999');
 
-        // Assert: check response
         $response->assertStatus(404);
+
         $response->assertJson([
             'message' => 'No tasks found',
             'details' => 'error',

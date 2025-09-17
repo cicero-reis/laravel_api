@@ -8,6 +8,7 @@ use App\Exceptions\Factory\MensagemDetailsExceptionFactory;
 use App\Exceptions\NotFoundException;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Resources\TaskResource;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -39,6 +40,11 @@ class TaskCreateController
             $message = MensagemDetailsExceptionFactory::create($e->getMessage(), 'error', 404);
 
             return new JsonResponse($message->toArray(), 400);
+            
+        } catch (AuthorizationException $e) {
+            $message = MensagemDetailsExceptionFactory::create('Unauthorized', 'error', 403);
+
+            return new JsonResponse($message->toArray(), 403);
         } catch (\Exception $e) {
             Log::channel('cloudwatch')->info('TaskCreateController', [
                 'error' => $e->getMessage(),

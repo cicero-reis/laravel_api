@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1\Task;
 use App\Core\Task\UseCases\Interfaces\TaskDeleteUseCaseInterface;
 use App\Exceptions\Factory\MensagemDetailsExceptionFactory;
 use App\Exceptions\NotFoundException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -20,12 +21,19 @@ class TaskDeleteController
     public function __invoke(int $id): JsonResponse
     {
         try {
+            
             $deleted = $this->useCase->execute($id);
+
             if (! $deleted) {
                 throw new NotFoundException('No tasks found', 404);
             }
 
             return new JsonResponse(null, 204);
+            
+        } catch (AuthorizationException $e) {
+            $message = MensagemDetailsExceptionFactory::create('Unauthorized', 'error', 403);
+
+            return new JsonResponse($message->toArray(), 403);
         } catch (NotFoundException $e) {
             $message = MensagemDetailsExceptionFactory::create($e->getMessage(), 'error', 404);
 

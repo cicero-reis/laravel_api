@@ -8,6 +8,7 @@ use App\Exceptions\Factory\MensagemDetailsExceptionFactory;
 use App\Exceptions\NotFoundException;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Http\Resources\TaskResource;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -37,6 +38,10 @@ class TaskUpdateController
             $result = new TaskResource($task);
 
             return new JsonResponse($result, 200);
+        } catch (AuthorizationException $e) {
+            $message = MensagemDetailsExceptionFactory::create('Unauthorized', 'error', 403);
+
+            return new JsonResponse($message->toArray(), 403);
         } catch (NotFoundException $e) {
             $message = MensagemDetailsExceptionFactory::create($e->getMessage(), 'error', 404);
 

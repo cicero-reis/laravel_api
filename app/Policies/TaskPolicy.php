@@ -12,7 +12,7 @@ class TaskPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -20,7 +20,7 @@ class TaskPolicy
      */
     public function view(User $user, Task $task): bool
     {
-        return false;
+        return $user->id === $task->user_id;
     }
 
     /**
@@ -28,7 +28,7 @@ class TaskPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return in_array($user->role, ['dev', 'admin']);
     }
 
     /**
@@ -36,7 +36,7 @@ class TaskPolicy
      */
     public function update(User $user, Task $task): bool
     {
-        return false;
+        return $user->id === $task->user_id || in_array($user->role, ['dev', 'admin']);
     }
 
     /**
@@ -44,7 +44,7 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task): bool
     {
-        return false;
+        return $user->id === $task->user_id || in_array($user->role, ['dev', 'admin']);
     }
 
     /**
@@ -52,7 +52,7 @@ class TaskPolicy
      */
     public function restore(User $user, Task $task): bool
     {
-        return false;
+        return in_array($user->role, ['dev', 'admin']);
     }
 
     /**
@@ -60,6 +60,6 @@ class TaskPolicy
      */
     public function forceDelete(User $user, Task $task): bool
     {
-        return false;
+        return in_array($user->role, ['dev', 'admin']);
     }
 }

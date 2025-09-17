@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\V1\User\UserDeleteController;
 use App\Http\Controllers\Api\V1\User\UserFindController;
 use App\Http\Controllers\Api\V1\User\UserListController;
 use App\Http\Controllers\Api\V1\User\UserUpdateController;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,7 +33,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/auth/refresh', RefreshController::class)->name('api.v1.auth.refresh');
     Route::post('/auth/logout', LogoutController::class)->name('api.v1.auth.logout');
 
-    Route::middleware(['auth:api', 'role:dev|admin|user'])->group(function () {
+    Route::middleware(['auth:api', 'role:dev,admin,user'])->group(function () {
 
         // User routes
         Route::get('/users', UserListController::class);

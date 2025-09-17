@@ -3,8 +3,10 @@
 namespace Tests\Feature\Task;
 
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Gate;
 
 class TaskUpdateIsCompletedControllerTest extends TestCase
 {
@@ -15,15 +17,20 @@ class TaskUpdateIsCompletedControllerTest extends TestCase
         parent::setUp();
 
         $this->withoutMiddleware();
+
+        Gate::shouldReceive('authorize')->andReturn(true);
     }
 
     public function test_update_task_is_completed_successfully()
     {
-        $task = Task::factory()->create();
+        $user = User::factory()->create();
+        $task = Task::factory()->create(['user_id' => $user->id]);
 
-        $response = $this->patchJson("/api/v1/tasks/{$task->id}", [
-            'is_completed' => 1,
-        ]);
+        $response = $this
+                        ->actingAs($user)
+                        ->patchJson("/api/v1/tasks/{$task->id}", [
+                            'is_completed' => 1,
+                        ]);
 
         $response->assertStatus(200);
 
@@ -44,6 +51,7 @@ class TaskUpdateIsCompletedControllerTest extends TestCase
         ]);
 
         $response->assertStatus(422);
+        
         $response->assertJsonValidationErrors(['is_completed']);
     }
 }
