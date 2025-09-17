@@ -4,8 +4,8 @@ namespace Tests\Feature\Task;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use Illuminate\Support\Facades\Gate;
+use Tests\TestCase;
 
 class TaskCreateControllerTest extends TestCase
 {
@@ -29,8 +29,8 @@ class TaskCreateControllerTest extends TestCase
         ];
 
         $response = $this
-                        ->actingAs($user)
-                        ->postJson('/api/v1/tasks', $payload);
+            ->actingAs($user)
+            ->postJson('/api/v1/tasks', $payload);
 
         $response->assertStatus(201);
 
@@ -53,11 +53,11 @@ class TaskCreateControllerTest extends TestCase
         $payload = [];
 
         $response = $this
-                        ->actingAs($user)
-                        ->postJson('/api/v1/tasks', $payload);
+            ->actingAs($user)
+            ->postJson('/api/v1/tasks', $payload);
 
         $response->assertStatus(422);
-        
+
         $response->assertJsonValidationErrors(['name']);
     }
 }

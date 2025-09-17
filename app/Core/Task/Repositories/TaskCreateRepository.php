@@ -12,7 +12,7 @@ class TaskCreateRepository implements TaskCreateRepositoryInterface
     public function createRepo(TaskCreateDTO $dto): ?Task
     {
         Gate::authorize('created');
-        
+
         return Task::create($dto->toArray());
     }
 }

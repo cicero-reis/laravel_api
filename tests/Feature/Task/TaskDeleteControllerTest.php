@@ -5,8 +5,8 @@ namespace Tests\Feature\Task;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use Illuminate\Support\Facades\Gate;
+use Tests\TestCase;
 
 class TaskDeleteControllerTest extends TestCase
 {
@@ -27,8 +27,8 @@ class TaskDeleteControllerTest extends TestCase
         $task = Task::factory()->create();
 
         $response = $this
-                        ->actingAs($user)
-                        ->deleteJson("/api/v1/tasks/{$task->id}");
+            ->actingAs($user)
+            ->deleteJson("/api/v1/tasks/{$task->id}");
 
         $response->assertStatus(204);
 
@@ -40,11 +40,11 @@ class TaskDeleteControllerTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this
-                        ->actingAs($user)
-                        ->deleteJson('/api/v1/tasks/999');
+            ->actingAs($user)
+            ->deleteJson('/api/v1/tasks/999');
 
         $response->assertStatus(404);
-        
+
         $response->assertJson([
             'message' => 'No tasks found',
             'details' => 'error',

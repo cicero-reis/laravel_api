@@ -21,7 +21,7 @@ class TaskDeleteController
     public function __invoke(int $id): JsonResponse
     {
         try {
-            
+
             $deleted = $this->useCase->execute($id);
 
             if (! $deleted) {
@@ -29,7 +29,7 @@ class TaskDeleteController
             }
 
             return new JsonResponse(null, 204);
-            
+
         } catch (AuthorizationException $e) {
             $message = MensagemDetailsExceptionFactory::create('Unauthorized', 'error', 403);
 

@@ -5,8 +5,8 @@ namespace Tests\Feature\Task;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use Illuminate\Support\Facades\Gate;
+use Tests\TestCase;
 
 class TaskFindControllerTest extends TestCase
 {
@@ -27,11 +27,11 @@ class TaskFindControllerTest extends TestCase
         $task = Task::factory()->create();
 
         $response = $this
-                        ->actingAs($user)
-                        ->getJson('/api/v1/tasks/'.$task->id);
+            ->actingAs($user)
+            ->getJson('/api/v1/tasks/'.$task->id);
 
         $response->assertStatus(200);
-        
+
         $response->assertJsonStructure([
             'id',
             'name',
@@ -50,8 +50,8 @@ class TaskFindControllerTest extends TestCase
     {
         $user = User::factory()->create();
         $response = $this
-                        ->actingAs($user)
-                        ->getJson('/api/v1/tasks/999');
+            ->actingAs($user)
+            ->getJson('/api/v1/tasks/999');
 
         $response->assertStatus(404);
 

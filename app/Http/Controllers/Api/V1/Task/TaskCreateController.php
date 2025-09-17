@@ -40,7 +40,7 @@ class TaskCreateController
             $message = MensagemDetailsExceptionFactory::create($e->getMessage(), 'error', 404);
 
             return new JsonResponse($message->toArray(), 400);
-            
+
         } catch (AuthorizationException $e) {
             $message = MensagemDetailsExceptionFactory::create('Unauthorized', 'error', 403);
 

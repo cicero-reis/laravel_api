@@ -5,8 +5,8 @@ namespace Tests\Feature\Task;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use Illuminate\Support\Facades\Gate;
+use Tests\TestCase;
 
 class TaskUpdateControllerTest extends TestCase
 {
@@ -29,8 +29,8 @@ class TaskUpdateControllerTest extends TestCase
         $payload = ['name' => 'New Name'];
 
         $response = $this
-                        ->actingAs($user)
-                        ->putJson("/api/v1/tasks/{$task->id}", $payload);
+            ->actingAs($user)
+            ->putJson("/api/v1/tasks/{$task->id}", $payload);
 
         $response
             ->assertStatus(200)
@@ -39,13 +39,13 @@ class TaskUpdateControllerTest extends TestCase
 
     public function test_update_task_not_found()
     {
-        $user = User::factory()->create();        
+        $user = User::factory()->create();
 
         $payload = ['name' => 'New Name'];
 
         $response = $this
-                        ->actingAs($user)
-                        ->putJson('/api/v1/tasks/9999', $payload);
+            ->actingAs($user)
+            ->putJson('/api/v1/tasks/9999', $payload);
 
         $response
             ->assertStatus(404)
@@ -64,8 +64,8 @@ class TaskUpdateControllerTest extends TestCase
         $payload = ['name' => ''];
 
         $response = $this
-                        ->actingAs($user)
-                        ->putJson("/api/v1/tasks/{$task->id}", $payload);
+            ->actingAs($user)
+            ->putJson("/api/v1/tasks/{$task->id}", $payload);
 
         $response->assertStatus(422);
     }
