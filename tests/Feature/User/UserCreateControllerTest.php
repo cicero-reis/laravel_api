@@ -21,7 +21,7 @@ class UserCreateControllerTest extends TestCase
         $payload = [
             'name' => 'User Name',
             'email' => 'user@gmail.com',
-            'role' => 'user'
+            'role' => 'user',
         ];
 
         $response = $this->postJson('/api/v1/users', $payload);
