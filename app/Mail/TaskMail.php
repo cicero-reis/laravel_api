@@ -39,7 +39,7 @@ class TaskMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.task_registered',
+            markdown: 'mail.task_registered',
             with: ['task' => $this->task],
         );
     }

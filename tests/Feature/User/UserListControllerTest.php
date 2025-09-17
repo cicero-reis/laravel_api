@@ -10,6 +10,13 @@ class UserListControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withoutMiddleware();
+    }
+
     public function test_index_returns_users_list()
     {
         User::factory()->count(3)->create();

@@ -10,6 +10,13 @@ class TaskDeleteControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withoutMiddleware();
+    }
+
     public function test_delete_existing_task_returns_no_content()
     {
         $task = Task::factory()->create();

@@ -9,11 +9,19 @@ class UserCreateControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withoutMiddleware();
+    }
+
     public function test_can_create_user()
     {
         $payload = [
             'name' => 'User Name',
             'email' => 'user@gmail.com',
+            'role' => 'user'
         ];
 
         $response = $this->postJson('/api/v1/users', $payload);

@@ -10,6 +10,13 @@ class TaskUpdateControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withoutMiddleware();
+    }
+
     public function test_update_task_success()
     {
         $task = Task::factory()->create(['name' => 'Old Name']);

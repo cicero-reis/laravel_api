@@ -10,6 +10,13 @@ class UserUpdateControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withoutMiddleware();
+    }
+
     public function test_update_user_success()
     {
         $user = User::factory()->create(['name' => 'Old Name', 'email' => 'teste@gmail.com']);
@@ -42,7 +49,6 @@ class UserUpdateControllerTest extends TestCase
 
         $payload = ['name' => ''];
 
-        // $response = $this->actingAs($user)->putJson("/api/v1/tasks/{$user->id}", $payload);
         $response = $this->putJson("/api/v1/users/{$user->id}", $payload);
 
         $response->assertStatus(422);

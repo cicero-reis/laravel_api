@@ -10,6 +10,13 @@ class TaskListControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withoutMiddleware();
+    }
+
     public function test_index_returns_tasks_list()
     {
         // Arrange: create some tasks

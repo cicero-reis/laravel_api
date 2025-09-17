@@ -110,6 +110,18 @@ class AppServiceProvider extends ServiceProvider
             \App\Core\User\UseCases\Interfaces\UserDeleteUseCaseInterface::class,
             \App\Core\User\UseCases\UserDeleteUseCase::class
         );
+
+        // JWT Auth Service Binding
+        $this->app->bind(
+            \App\Infrastructure\JWT\Interfaces\LoginServiceInterface::class,
+            \App\Infrastructure\JWT\Services\LoginService::class);
+        $this->app->bind(
+            \App\Infrastructure\JWT\Interfaces\LogoutServiceInterface::class,
+            \App\Infrastructure\JWT\Services\LogoutService::class);
+        $this->app->bind(
+            \App\Infrastructure\JWT\Interfaces\RefreshServiceInterface::class,
+            \App\Infrastructure\JWT\Services\RefreshService::class
+        );
     }
 
     /**

@@ -10,6 +10,13 @@ class UserDeleteControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withoutMiddleware();
+    }
+
     public function test_delete_existing_user_returns_no_content()
     {
         $user = User::factory()->create();
@@ -17,7 +24,7 @@ class UserDeleteControllerTest extends TestCase
         $response = $this->deleteJson("/api/v1/users/{$user->id}");
 
         $response->assertStatus(204);
-        $this->assertDatabaseMissing('users', ['id' => $user->id]);
+        $this->assertSoftDeleted('users', ['id' => $user->id]);
     }
 
     public function test_delete_non_existing_user_returns_not_found()

@@ -10,6 +10,13 @@ class UserFindControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withoutMiddleware();
+    }
+
     public function test_show_returns_user_by_id()
     {
         $user = User::factory()->create();

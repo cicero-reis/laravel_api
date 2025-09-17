@@ -9,6 +9,13 @@ class TaskCreateControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withoutMiddleware();
+    }
+
     public function test_can_create_task()
     {
         $payload = [

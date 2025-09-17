@@ -3,6 +3,10 @@
 // API Routes
 
 // User Controllers
+
+use App\Http\Controllers\Api\V1\Auth\LoginController;
+use App\Http\Controllers\Api\V1\Auth\LogoutController;
+use App\Http\Controllers\Api\V1\Auth\RefreshController;
 use App\Http\Controllers\Api\V1\Task\TaskCreateController;
 use App\Http\Controllers\Api\V1\Task\TaskDeleteController;
 use App\Http\Controllers\Api\V1\Task\TaskFindController;
@@ -24,18 +28,26 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
 
-    // User routes
-    Route::get('/users', UserListController::class);
-    Route::get('/users/{id}', UserFindController::class);
-    Route::post('/users', UserCreateController::class);
-    Route::put('/users/{id}', UserUpdateController::class);
-    Route::delete('/users/{id}', UserDeleteController::class);
+    Route::post('/auth/login', LoginController::class)->name('api.v1.auth.login');
+    Route::post('/auth/refresh', RefreshController::class)->name('api.v1.auth.refresh');
+    Route::post('/auth/logout', LogoutController::class)->name('api.v1.auth.logout');
 
-    // Task routes
-    Route::get('/tasks', TaskListController::class);
-    Route::get('/tasks/{id}', TaskFindController::class);
-    Route::post('/tasks', TaskCreateController::class);
-    Route::put('/tasks/{id}', TaskUpdateController::class);
-    Route::delete('/tasks/{id}', TaskDeleteController::class);
-    Route::patch('/tasks/{id}', TaskUpdateIsCompletedController::class);
+    Route::middleware(['auth:api', 'role:dev|admin|user'])->group(function () {
+
+        // User routes
+        Route::get('/users', UserListController::class);
+        Route::get('/users/{id}', UserFindController::class);
+        Route::post('/users', UserCreateController::class);
+        Route::put('/users/{id}', UserUpdateController::class);
+        Route::delete('/users/{id}', UserDeleteController::class);
+
+        // Task routes
+        Route::get('/tasks', TaskListController::class);
+        Route::get('/tasks/{id}', TaskFindController::class);
+        Route::post('/tasks', TaskCreateController::class);
+        Route::put('/tasks/{id}', TaskUpdateController::class);
+        Route::delete('/tasks/{id}', TaskDeleteController::class);
+        Route::patch('/tasks/{id}', TaskUpdateIsCompletedController::class);
+    });
+
 });

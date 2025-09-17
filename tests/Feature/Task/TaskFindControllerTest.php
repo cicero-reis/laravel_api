@@ -10,6 +10,13 @@ class TaskFindControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withoutMiddleware();
+    }
+
     public function test_show_returns_task_by_id()
     {
         // Arrange: create a task
