@@ -26,6 +26,6 @@ class TaskListRepository implements TaskListRepositoryInterface
             return $query->get();
         }
 
-        return $query->paginate(5);
+        return $query->paginate(100);
     }
 }

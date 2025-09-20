@@ -24,9 +24,9 @@ class TaskListController
 
             $filters = request()->only(['name', 'is_completed', 'created_at']);
 
-            $tasks = $this->taskListUseCase->execute($filters, true);
+            $tasks = $this->taskListUseCase->execute($filters);
 
-            if (empty($tasks->items())) {
+            if ($tasks->count() == 0) {
                 throw new NotFoundException('No tasks found', 404);
             }
 
@@ -42,7 +42,7 @@ class TaskListController
                 'error' => $e->getMessage(),
             ]);
 
-            return new JsonResponse(['error' => 'An error occurred while fetching tasks'], 500);
+            return new JsonResponse(['error' => $e->getMessage()], 500);
         } catch (\Throwable $e) {
             Log::channel('cloudwatch')->info('TaskListController', [
                 'error' => $e->getMessage(),

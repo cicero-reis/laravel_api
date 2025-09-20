@@ -19,7 +19,6 @@ use App\Http\Controllers\Api\V1\User\UserDeleteController;
 use App\Http\Controllers\Api\V1\User\UserFindController;
 use App\Http\Controllers\Api\V1\User\UserListController;
 use App\Http\Controllers\Api\V1\User\UserUpdateController;
-use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

@@ -16,7 +16,7 @@ class TaskDeleteRepository implements TaskDeleteRepositoryInterface
             return false;
         }
 
-        Gate::authorize('delete', $task);
+        //Gate::authorize('delete', $task);
 
         return (bool) $task->delete();
     }
