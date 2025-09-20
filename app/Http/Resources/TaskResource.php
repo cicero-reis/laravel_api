@@ -20,11 +20,11 @@ class TaskResource extends JsonResource
             'name' => $this->name,
             'is_completed' => $this->is_completed ? 1 : 0,
             'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
-             'user' => $this->user ? [
+            'user' => $this->user ? [
                 'id' => $this->user->id,
                 'name' => $this->user->name,
-                'email' => $this->user->email
-            ] : null,                 
+                'email' => $this->user->email,
+            ] : null,
         ];
     }
 }
