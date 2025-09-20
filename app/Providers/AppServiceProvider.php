@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Core\Task\Services\Delivery\DeliveryStatusService;
+use App\Core\Task\Services\Delivery\DueToday;
+use App\Core\Task\Services\Delivery\Overdue;
+use App\Core\Task\Services\Delivery\WithinDeadline;
 use App\Models\Task;
 use App\Models\User;
 use App\Observers\TaskObserver;
@@ -41,6 +45,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Core\Task\Repositories\TaskUpdateIsCompletedRepository::class
         );
 
+        $this->app->bind(
+            \App\Core\Task\Repositories\Interfaces\TaskUpdateUserIdRepositoryInterface::class,
+            \App\Core\Task\Repositories\TaskUpdateUserIdRepository::class
+        );
+
         // Task Use Case Bindings
         $this->app->bind(
             \App\Core\Task\UseCases\Interfaces\TaskListUseCaseInterface::class,
@@ -65,6 +74,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             \App\Core\Task\UseCases\Interfaces\TaskUpdateIsCompletedUseCaseInterface::class,
             \App\Core\Task\UseCases\TaskUpdateIsCompletedUseCase::class
+        );
+        $this->app->bind(
+            \App\Core\Task\UseCases\Interfaces\TaskUpdateUserIdUseCaseInterface::class,
+            \App\Core\Task\UseCases\TaskUpdateUserIdUseCase::class
         );
 
         // User Repository Bindings
@@ -114,14 +127,29 @@ class AppServiceProvider extends ServiceProvider
         // JWT Auth Service Binding
         $this->app->bind(
             \App\Infrastructure\JWT\Interfaces\LoginServiceInterface::class,
-            \App\Infrastructure\JWT\Services\LoginService::class);
+            \App\Infrastructure\JWT\Services\LoginService::class
+        );
         $this->app->bind(
             \App\Infrastructure\JWT\Interfaces\LogoutServiceInterface::class,
-            \App\Infrastructure\JWT\Services\LogoutService::class);
+            \App\Infrastructure\JWT\Services\LogoutService::class
+        );
         $this->app->bind(
             \App\Infrastructure\JWT\Interfaces\RefreshServiceInterface::class,
             \App\Infrastructure\JWT\Services\RefreshService::class
         );
+
+        // Strategies
+        $this->app->singleton(WithinDeadline::class);
+        $this->app->singleton(DueToday::class);
+        $this->app->singleton(Overdue::class);
+
+        $this->app->singleton(DeliveryStatusService::class, function ($app) {
+            return new DeliveryStatusService([
+                $app->make(WithinDeadline::class),
+                $app->make(DueToday::class),
+                $app->make(Overdue::class),
+            ]);
+        });
     }
 
     /**

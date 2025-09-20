@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id')->default(0);
-            $table->string('name');
-            $table->boolean('is_completed')->default(false);
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->unsignedTinyInteger('priority')->nullable()->after('is_completed');
+            $table->date('due_date')->nullable()->after('priority');
         });
     }
 
@@ -26,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tasks');
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->dropColumn(['priority', 'due_date']);
+        });
     }
 };

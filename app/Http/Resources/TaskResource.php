@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Core\Task\Services\Delivery\DeliveryStatusService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -15,11 +16,15 @@ class TaskResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $deliveryService = resolve(DeliveryStatusService::class);
+
         return [
             'id' => $this->id,
             'name' => $this->name,
             'is_completed' => $this->is_completed ? 1 : 0,
             'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
+            'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s'),
+            'delivery_status' => $deliveryService->getStatus($this->resource),
             'user' => $this->user ? [
                 'id' => $this->user->id,
                 'name' => $this->user->name,

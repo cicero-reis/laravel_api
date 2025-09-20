@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\V1\Task\TaskListController;
 use App\Http\Controllers\Api\V1\Task\TaskUpdateController;
 // Task Controllers
 use App\Http\Controllers\Api\V1\Task\TaskUpdateIsCompletedController;
+use App\Http\Controllers\Api\V1\Task\TaskUpdateUserIdController;
 use App\Http\Controllers\Api\V1\User\UserCreateController;
 use App\Http\Controllers\Api\V1\User\UserDeleteController;
 use App\Http\Controllers\Api\V1\User\UserFindController;
@@ -47,7 +48,8 @@ Route::prefix('v1')->group(function () {
         Route::post('/tasks', TaskCreateController::class);
         Route::put('/tasks/{id}', TaskUpdateController::class);
         Route::delete('/tasks/{id}', TaskDeleteController::class);
-        Route::patch('/tasks/{id}', TaskUpdateIsCompletedController::class);
+        Route::patch('/tasks/iscompleted/{id}', TaskUpdateIsCompletedController::class);
+        Route::patch('/tasks/userid/{id}', TaskUpdateUserIdController::class);
     });
 
 });

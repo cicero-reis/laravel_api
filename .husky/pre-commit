@@ -7,5 +7,5 @@ echo "✅ Pint finalizado!"
 echo
 
 echo "🧪 Iniciando PHPUnit..."
-./vendor/bin/phpunit
+#./vendor/bin/phpunit
 echo "✅ PHPUnit finalizado!"

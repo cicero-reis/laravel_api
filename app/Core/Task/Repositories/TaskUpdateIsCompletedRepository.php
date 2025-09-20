@@ -13,7 +13,7 @@ class TaskUpdateIsCompletedRepository implements TaskUpdateIsCompletedRepository
     {
         $task = Task::find($dto->id);
 
-        // Gate::authorize('update', $task);
+        Gate::authorize('update', $task);
 
         if (! $task) {
             return null;

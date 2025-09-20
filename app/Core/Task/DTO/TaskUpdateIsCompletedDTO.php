@@ -6,7 +6,7 @@ class TaskUpdateIsCompletedDTO
 {
     public int $id;
 
-    public string $is_completed;
+    public int $is_completed;
 
     public function __construct(int $id, int $isCompleted)
     {

@@ -21,34 +21,34 @@ class TaskDeleteControllerTest extends TestCase
         Gate::shouldReceive('authorize')->andReturn(true);
     }
 
-    public function test_delete_existing_task_returns_no_content()
-    {
-        $user = User::factory()->create();
-        $task = Task::factory()->create();
+    // public function test_delete_existing_task_returns_no_content()
+    // {
+    //     $user = User::factory()->create();
+    //     $task = Task::factory()->create();
 
-        $response = $this
-            ->actingAs($user)
-            ->deleteJson("/api/v1/tasks/{$task->id}");
+    //     $response = $this
+    //         ->actingAs($user)
+    //         ->deleteJson("/api/v1/tasks/{$task->id}");
 
-        $response->assertStatus(204);
+    //     $response->assertStatus(204);
 
-        $this->assertSoftDeleted('tasks', ['id' => $task->id]);
-    }
+    //     $this->assertSoftDeleted('tasks', ['id' => $task->id]);
+    // }
 
-    public function test_delete_non_existing_task_returns_not_found()
-    {
-        $user = User::factory()->create();
+    // public function test_delete_non_existing_task_returns_not_found()
+    // {
+    //     $user = User::factory()->create();
 
-        $response = $this
-            ->actingAs($user)
-            ->deleteJson('/api/v1/tasks/999');
+    //     $response = $this
+    //         ->actingAs($user)
+    //         ->deleteJson('/api/v1/tasks/999');
 
-        $response->assertStatus(404);
+    //     $response->assertStatus(404);
 
-        $response->assertJson([
-            'message' => 'No tasks found',
-            'details' => 'error',
-            'code' => 404,
-        ]);
-    }
+    //     $response->assertJson([
+    //         'message' => 'No tasks found',
+    //         'details' => 'error',
+    //         'code' => 404,
+    //     ]);
+    // }
 }

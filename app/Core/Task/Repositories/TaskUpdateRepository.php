@@ -13,7 +13,7 @@ class TaskUpdateRepository implements TaskUpdateRepositoryInterface
     {
         $task = Task::find($dto->id);
 
-        // Gate::authorize('update', $task);
+        Gate::authorize('update', $task);
 
         if ($task) {
             $task->update($dto->toArray());
