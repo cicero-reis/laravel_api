@@ -2,11 +2,10 @@
 
 namespace App\Jobs;
 
+use App\Core\Task\Services\Delivery\DeliveryStatusService;
 use App\Infrastructure\Firebase\FirebaseMessaging;
 use App\Models\Task;
-use App\Core\Task\Services\Delivery\DeliveryStatusService;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
 
 class SendTaskReminderJob
 {
@@ -22,13 +21,13 @@ class SendTaskReminderJob
             ->where('is_completed', 0)
             ->chunk(500, function ($tasks) use ($fcm, $deliveryStatus) {
                 foreach ($tasks as $task) {
-                    
-                    echo $task->id . PHP_EOL;
 
-                    if (!$task->user || !$task->user->fcm_token) {
+                    echo $task->id.PHP_EOL;
+
+                    if (! $task->user || ! $task->user->fcm_token) {
                         continue;
                     }
-                    
+
                     $status = $deliveryStatus->getStatus($task);
 
                     $fcm->sendToToken(
@@ -37,12 +36,11 @@ class SendTaskReminderJob
                         "The task \"{$task->name}\" is due today!",
                         [
                             'task_id' => (string) $task->id,
-                            'status'  => $status['value'],
-                            'color'   => $status['color'],
+                            'status' => $status['value'],
+                            'color' => $status['color'],
                         ]
                     );
                 }
             });
     }
 }
-

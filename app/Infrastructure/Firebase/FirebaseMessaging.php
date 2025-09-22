@@ -2,10 +2,10 @@
 
 namespace App\Infrastructure\Firebase;
 
+use Illuminate\Support\Facades\Log;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification;
-use Illuminate\Support\Facades\Log;
 
 class FirebaseMessaging
 {

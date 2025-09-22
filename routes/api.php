@@ -54,7 +54,7 @@ Route::prefix('v1')->group(function () {
         // Firebase
         Route::post('/auth/fcm-token', function (Request $request) {
             $request->user()->update([
-                'fcm_token' => $request->fcm_token
+                'fcm_token' => $request->fcm_token,
             ]);
 
             return response()->json(['success' => true]);
