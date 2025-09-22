@@ -50,6 +50,15 @@ Route::prefix('v1')->group(function () {
         Route::delete('/tasks/{id}', TaskDeleteController::class);
         Route::patch('/tasks/iscompleted/{id}', TaskUpdateIsCompletedController::class);
         Route::patch('/tasks/userid/{id}', TaskUpdateUserIdController::class);
+
+        // Firebase
+        Route::post('/auth/fcm-token', function (Request $request) {
+            $request->user()->update([
+                'fcm_token' => $request->fcm_token
+            ]);
+
+            return response()->json(['success' => true]);
+        });
     });
 
 });

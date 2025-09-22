@@ -12,7 +12,7 @@ enum DeliveryStatus: string
     {
         return match ($this) {
             self::WITHIN_DEADLINE => 'green',
-            self::DUE_TODAY => 'yellow',
+            self::DUE_TODAY => 'orange',
             self::OVERDUE => 'red'
         };
     }
