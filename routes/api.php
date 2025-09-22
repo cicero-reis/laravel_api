@@ -56,6 +56,7 @@ Route::prefix('v1')->group(function () {
             $request->user()->update([
                 'fcm_token' => $request->fcm_token,
             ]);
+
             return response()->json(['success' => true]);
         });
     });
