@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Api\V1\Task;
 
-use App\Core\Task\UseCases\Interfaces\TaskListUseCaseInterface;
+use App\Core\Task\UseCases\Interfaces\TaskPaginateUseCaseInterface;
 use App\Exceptions\Factory\MensagemDetailsExceptionFactory;
 use App\Exceptions\NotFoundException;
 use App\Http\Resources\TaskResourceCollection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 
-class TaskListController
+class TaskPaginateController
 {
-    protected $taskListUseCase;
+    protected $TaskPaginateUseCase;
 
-    public function __construct(TaskListUseCaseInterface $taskListUseCase)
+    public function __construct(TaskPaginateUseCaseInterface $TaskPaginateUseCase)
     {
-        $this->taskListUseCase = $taskListUseCase;
+        $this->TaskPaginateUseCase = $TaskPaginateUseCase;
     }
 
     public function __invoke(): JsonResponse
@@ -24,7 +24,7 @@ class TaskListController
 
             $filters = request()->only(['name', 'is_completed', 'created_at']);
 
-            $tasks = $this->taskListUseCase->execute($filters);
+            $tasks = $this->TaskPaginateUseCase->execute($filters);
 
             if ($tasks->count() == 0) {
                 throw new NotFoundException('No tasks found', 404);
@@ -38,13 +38,13 @@ class TaskListController
 
             return new JsonResponse($message->toArray(), 404);
         } catch (\Exception $e) {
-            Log::channel('cloudwatch')->info('TaskListController', [
+            Log::channel('cloudwatch')->info('TaskPaginateController', [
                 'error' => $e->getMessage(),
             ]);
 
             return new JsonResponse(['error' => $e->getMessage()], 500);
         } catch (\Throwable $e) {
-            Log::channel('cloudwatch')->info('TaskListController', [
+            Log::channel('cloudwatch')->info('TaskPaginateController', [
                 'error' => $e->getMessage(),
             ]);
 

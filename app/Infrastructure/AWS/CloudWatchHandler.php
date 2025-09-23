@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Logging;
+namespace App\Infrastructure\AWS;
 
 use Aws\CloudWatchLogs\CloudWatchLogsClient;
 use Monolog\Handler\AbstractProcessingHandler;

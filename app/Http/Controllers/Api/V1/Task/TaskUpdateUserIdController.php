@@ -47,13 +47,13 @@ class TaskUpdateUserIdController
 
             return new JsonResponse($message->toArray(), 403);
         } catch (\Exception $e) {
-            Log::channel('cloudwatch')->info('TaskListController', [
+            Log::channel('cloudwatch')->info('TaskPaginateController', [
                 'error' => $e->getMessage(),
             ]);
 
             return new JsonResponse(['error' => 'An error occurred while fetching tasks'], 500);
         } catch (\Throwable $e) {
-            Log::channel('cloudwatch')->info('TaskListController', [
+            Log::channel('cloudwatch')->info('TaskPaginateController', [
                 'error' => $e->getMessage(),
             ]);
 

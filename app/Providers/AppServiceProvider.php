@@ -21,8 +21,8 @@ class AppServiceProvider extends ServiceProvider
     {
         // Task Repository Bindings
         $this->app->bind(
-            \App\Core\Task\Repositories\Interfaces\TaskListRepositoryInterface::class,
-            \App\Core\Task\Repositories\TaskListRepository::class
+            \App\Core\Task\Repositories\Interfaces\TaskPaginatetRepositoryInterface::class,
+            \App\Core\Task\Repositories\TaskPaginateRepository::class
         );
         $this->app->bind(
             \App\Core\Task\Repositories\Interfaces\TaskFindRepositoryInterface::class,
@@ -52,8 +52,8 @@ class AppServiceProvider extends ServiceProvider
 
         // Task Use Case Bindings
         $this->app->bind(
-            \App\Core\Task\UseCases\Interfaces\TaskListUseCaseInterface::class,
-            \App\Core\Task\UseCases\TaskListUseCase::class
+            \App\Core\Task\UseCases\Interfaces\TaskPaginateUseCaseInterface::class,
+            \App\Core\Task\UseCases\TaskPaginateUseCase::class
         );
         $this->app->bind(
             \App\Core\Task\UseCases\Interfaces\TaskFindUseCaseInterface::class,

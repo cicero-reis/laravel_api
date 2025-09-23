@@ -1,6 +1,6 @@
 <?php
 
-use App\Logging\CloudWatchHandler;
+use App\Infrastructure\AWS\CloudWatchHandler;
 use Aws\CloudWatchLogs\CloudWatchLogsClient;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;

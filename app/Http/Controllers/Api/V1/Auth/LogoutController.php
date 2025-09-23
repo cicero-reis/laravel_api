@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Auth;
 
-use App\Infrastructure\Enums\JWTAuthEnum;
+use App\Infrastructure\JWT\Enums\JWTAuthEnum;
 use App\Infrastructure\JWT\Interfaces\LogoutServiceInterface;
 use Tymon\JWTAuth\Exceptions\JWTException;
 

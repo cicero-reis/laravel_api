@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api\V1\Auth;
 
-use App\Infrastructure\DTO\TokenResponseDTO;
-use App\Infrastructure\Enums\JWTAuthEnum;
+use App\Infrastructure\JWT\DTO\TokenResponseDTO;
+use App\Infrastructure\JWT\Enums\JWTAuthEnum;
 use App\Infrastructure\JWT\Interfaces\RefreshServiceInterface;
 use Tymon\JWTAuth\Exceptions\JWTException;
 

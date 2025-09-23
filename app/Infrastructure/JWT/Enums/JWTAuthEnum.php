@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Enums;
+namespace App\Infrastructure\JWT\Enums;
 
 class JWTAuthEnum
 {

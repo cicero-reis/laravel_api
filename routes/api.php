@@ -10,7 +10,7 @@ use App\Http\Controllers\Api\V1\Auth\RefreshController;
 use App\Http\Controllers\Api\V1\Task\TaskCreateController;
 use App\Http\Controllers\Api\V1\Task\TaskDeleteController;
 use App\Http\Controllers\Api\V1\Task\TaskFindController;
-use App\Http\Controllers\Api\V1\Task\TaskListController;
+use App\Http\Controllers\Api\V1\Task\TaskPaginateController;
 use App\Http\Controllers\Api\V1\Task\TaskUpdateController;
 // Task Controllers
 use App\Http\Controllers\Api\V1\Task\TaskUpdateIsCompletedController;
@@ -43,7 +43,7 @@ Route::prefix('v1')->group(function () {
         Route::delete('/users/{id}', UserDeleteController::class);
 
         // Task routes
-        Route::get('/tasks', TaskListController::class);
+        Route::get('/tasks', TaskPaginateController::class);
         Route::get('/tasks/{id}', TaskFindController::class);
         Route::post('/tasks', TaskCreateController::class);
         Route::put('/tasks/{id}', TaskUpdateController::class);

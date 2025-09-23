@@ -1,6 +1,6 @@
 <?php
 
-use App\Infrastructure\Enums\JWTAuthEnum;
+use App\Infrastructure\JWT\Enums\JWTAuthEnum;
 use Illuminate\Http\JsonResponse;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;

@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Gate;
 use Tests\TestCase;
 
-class TaskListControllerTest extends TestCase
+class TaskPaginateControllerTest extends TestCase
 {
     use RefreshDatabase;
 

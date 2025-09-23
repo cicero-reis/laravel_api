@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\JWT\Interfaces;
 
-use App\Infrastructure\DTO\LoginDTO;
+use App\Infrastructure\JWT\DTO\LoginDTO;
 
 interface LoginServiceInterface
 {

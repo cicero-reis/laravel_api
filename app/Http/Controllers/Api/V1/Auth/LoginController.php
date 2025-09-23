@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Requests\AuthLoginRequest;
-use App\Infrastructure\DTO\LoginDTO;
-use App\Infrastructure\DTO\TokenResponseDTO;
+use App\Infrastructure\JWT\DTO\LoginDTO;
+use App\Infrastructure\JWT\DTO\TokenResponseDTO;
 use App\Infrastructure\JWT\Interfaces\LoginServiceInterface;
 
 class LoginController

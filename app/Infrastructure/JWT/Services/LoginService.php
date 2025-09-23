@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\JWT\Services;
 
-use App\Infrastructure\DTO\LoginDTO;
+use App\Infrastructure\JWT\DTO\LoginDTO;
 use App\Infrastructure\JWT\Interfaces\LoginServiceInterface;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
