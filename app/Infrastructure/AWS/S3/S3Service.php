@@ -2,7 +2,6 @@
 
 namespace App\Infrastructure\AWS\S3;
 
-use App\Core\Repositories\S3\S3RepositoryInterface;
 use App\Infrastructure\AWS\S3\S3RepositoryInterface as S3S3RepositoryInterface;
 
 class S3Service

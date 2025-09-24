@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api\V1\User;
+
 use App\Core\User\UseCases\Interfaces\UserProfileUserCaseInterface as InterfacesUserProfileUserCaseInterface;
 use App\Http\Controllers\Controller;
 use App\Infrastructure\AWS\S3\S3Service;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 class UserProfileController extends Controller
 {
     private $s3Service;
+
     private $userProfileUserCase;
 
     public function __construct(S3Service $s3Service, InterfacesUserProfileUserCaseInterface $userProfileUserCase)
