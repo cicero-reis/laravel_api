@@ -33,16 +33,16 @@ class TaskFindControllerTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertJsonStructure([
-             "id",
-            "name",
-            "is_completed",
-            "created_at",
-            "updated_at",
-            "delivery_status" => [
-                "value",
-                "color"
+            'id',
+            'name',
+            'is_completed',
+            'created_at',
+            'updated_at',
+            'delivery_status' => [
+                'value',
+                'color',
             ],
-            "user"
+            'user',
         ]);
         $response->assertJson([
             'id' => $task->id,

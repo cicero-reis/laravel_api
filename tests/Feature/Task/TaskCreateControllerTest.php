@@ -26,7 +26,7 @@ class TaskCreateControllerTest extends TestCase
 
         $payload = [
             'name' => 'Test Task',
-            "priority" => 1
+            'priority' => 1,
         ];
 
         $response = $this
@@ -36,16 +36,16 @@ class TaskCreateControllerTest extends TestCase
         $response->assertStatus(201);
 
         $response->assertJsonStructure([
-            "id",
-            "name",
-            "is_completed",
-            "created_at",
-            "updated_at",
-            "delivery_status" => [
-                "value",
-                "color"
+            'id',
+            'name',
+            'is_completed',
+            'created_at',
+            'updated_at',
+            'delivery_status' => [
+                'value',
+                'color',
             ],
-            "user"
+            'user',
         ]);
 
         $this->assertDatabaseHas('tasks', [
