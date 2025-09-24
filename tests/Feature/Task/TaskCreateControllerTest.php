@@ -20,44 +20,51 @@ class TaskCreateControllerTest extends TestCase
         Gate::shouldReceive('authorize')->andReturn(true);
     }
 
-    // public function test_can_create_task()
-    // {
-    //     $user = User::factory()->create();
+    public function test_can_create_task()
+    {
+        $user = User::factory()->create();
 
-    //     $payload = [
-    //         'name' => 'Test Task',
-    //     ];
+        $payload = [
+            'name' => 'Test Task',
+            "priority" => 1
+        ];
 
-    //     $response = $this
-    //         ->actingAs($user)
-    //         ->postJson('/api/v1/tasks', $payload);
+        $response = $this
+            ->actingAs($user)
+            ->postJson('/api/v1/tasks', $payload);
 
-    //     $response->assertStatus(201);
+        $response->assertStatus(201);
 
-    //     $response->assertJsonStructure([
-    //         'id',
-    //         'name',
-    //         'is_completed',
-    //         'created_at',
-    //     ]);
+        $response->assertJsonStructure([
+            "id",
+            "name",
+            "is_completed",
+            "created_at",
+            "updated_at",
+            "delivery_status" => [
+                "value",
+                "color"
+            ],
+            "user"
+        ]);
 
-    //     $this->assertDatabaseHas('tasks', [
-    //         'name' => 'Test Task',
-    //     ]);
-    // }
+        $this->assertDatabaseHas('tasks', [
+            'name' => 'Test Task',
+        ]);
+    }
 
-    // public function test_create_task_validation_error()
-    // {
-    //     $user = User::factory()->create();
+    public function test_create_task_validation_error()
+    {
+        $user = User::factory()->create();
 
-    //     $payload = [];
+        $payload = [];
 
-    //     $response = $this
-    //         ->actingAs($user)
-    //         ->postJson('/api/v1/tasks', $payload);
+        $response = $this
+            ->actingAs($user)
+            ->postJson('/api/v1/tasks', $payload);
 
-    //     $response->assertStatus(422);
+        $response->assertStatus(422);
 
-    //     $response->assertJsonValidationErrors(['name']);
-    // }
+        $response->assertJsonValidationErrors(['name']);
+    }
 }

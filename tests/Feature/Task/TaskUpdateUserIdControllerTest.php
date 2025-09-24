@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Gate;
 use Tests\TestCase;
 
-class TaskUpdateIsCompletedControllerTest extends TestCase
+class TaskUpdateUserIdControllerTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -28,8 +28,8 @@ class TaskUpdateIsCompletedControllerTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->patchJson("/api/v1/tasks/iscompleted/{$task->id}", [
-                'is_completed' => 1,
+            ->patchJson("/api/v1/tasks/userid/{$task->id}", [
+                'user_id' => 1,
             ]);
 
         $response->assertStatus(200);
@@ -46,12 +46,10 @@ class TaskUpdateIsCompletedControllerTest extends TestCase
     {
         $task = Task::factory()->create();
 
-        $response = $this->patchJson("/api/v1/tasks/iscompleted/{$task->id}", [
-            'is_completed' => 10,
-        ]);
+        $response = $this->patchJson("/api/v1/tasks/userid/{$task->id}", []);
 
         $response->assertStatus(422);
 
-        $response->assertJsonValidationErrors(['is_completed']);
+        $response->assertJsonValidationErrors(['user_id']);
     }
 }
