@@ -27,7 +27,7 @@ class TaskCreateController
 
             $dto = TaskCreateDTOFactory::createFromArray([
                 'name' => $request->input('name'),
-                'priority' => $request->input('priority')
+                'priority' => $request->input('priority'),
             ]);
 
             $task = $this->useCase->execute($dto);

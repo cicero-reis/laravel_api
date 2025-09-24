@@ -15,9 +15,9 @@ class RoleMiddleware
     {
         Log::info('Role check', [
             'user_role' => optional($request->user())->role,
-            'allowed_roles' => $roles
+            'allowed_roles' => $roles,
         ]);
-        
+
         if (! $request->user() || ! in_array($request->user()->role, $roles)) {
             return response()->json(['message' => 'Unauthorized'], self::UNAUTHORIZED_STATUS);
         }

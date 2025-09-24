@@ -5,7 +5,9 @@ namespace App\Core\Task\DTO;
 class TaskUpdateDTO
 {
     public int $id;
+
     public string $name;
+
     public int $priority;
 
     public function __construct(int $id, string $name, int $priority)

@@ -17,7 +17,7 @@ class TaskUpdateUserIdRepository implements TaskUpdateUserIdRepositoryInterface
 
         Gate::authorize('update', $task);
 
-        if (!($task && $user)) {
+        if (! ($task && $user)) {
             return null;
         }
 

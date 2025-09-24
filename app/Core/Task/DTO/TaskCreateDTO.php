@@ -5,6 +5,7 @@ namespace App\Core\Task\DTO;
 class TaskCreateDTO
 {
     public string $name;
+
     public string $priority;
 
     public function __construct(string $name, string $priority)
@@ -17,7 +18,7 @@ class TaskCreateDTO
     {
         return [
             'name' => $this->name,
-            'priority' => $this->priority            
+            'priority' => $this->priority,
         ];
     }
 }
