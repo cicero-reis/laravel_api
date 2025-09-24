@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\V1\User\UserCreateController;
 use App\Http\Controllers\Api\V1\User\UserDeleteController;
 use App\Http\Controllers\Api\V1\User\UserFindController;
 use App\Http\Controllers\Api\V1\User\UserListController;
+use App\Http\Controllers\Api\V1\User\UserProfileController;
 use App\Http\Controllers\Api\V1\User\UserUpdateController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/users', UserCreateController::class);
         Route::put('/users/{id}', UserUpdateController::class);
         Route::delete('/users/{id}', UserDeleteController::class);
+        Route::post('/users/upload-profile/{id}', [UserProfileController::class, 'upload']);
 
         // Task routes
         Route::get('/tasks', TaskPaginateController::class);

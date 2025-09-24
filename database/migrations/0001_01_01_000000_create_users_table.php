@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->enum('role', ['dev', 'admin', 'user'])->default('user');
             $table->string('email')->unique();
+            $table->string('profile')->nullable()->comment('S3 path for user profile');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

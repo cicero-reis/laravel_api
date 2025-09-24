@@ -101,6 +101,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Core\User\Repositories\Interfaces\UserDeleteRepositoryInterface::class,
             \App\Core\User\Repositories\UserDeleteRepository::class
         );
+        $this->app->bind(
+            \App\Core\User\Repositories\Interfaces\UserProfileRepositoryInterface::class,
+            \App\Core\User\Repositories\UserProfileRepository::class,
+        );
 
         // User Use Case Bindings
         $this->app->bind(
@@ -123,6 +127,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Core\User\UseCases\Interfaces\UserDeleteUseCaseInterface::class,
             \App\Core\User\UseCases\UserDeleteUseCase::class
         );
+        $this->app->bind(
+            \App\Core\User\UseCases\Interfaces\UserProfileUserCaseInterface::class,
+            \App\Core\User\UseCases\UserProfileUserCase::class
+        );
 
         // JWT Auth Service Binding
         $this->app->bind(
@@ -136,6 +144,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             \App\Infrastructure\JWT\Interfaces\RefreshServiceInterface::class,
             \App\Infrastructure\JWT\Services\RefreshService::class
+        );
+
+        $this->app->bind(
+            \App\Infrastructure\AWS\S3\S3RepositoryInterface::class,
+            \App\Infrastructure\AWS\S3\S3Repository::class
         );
 
         // Strategies

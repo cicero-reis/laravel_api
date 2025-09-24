@@ -31,6 +31,7 @@ class TaskResource extends JsonResource
                 'id' => $this->user->id,
                 'name' => $this->user->name,
                 'email' => $this->user->email,
+                'profile' => $this->user->profile ? config('filesystems.disks.s3.bucket_objetc_url') . '/' . $this->user->profile : null
             ] : null,
         ];
     }
