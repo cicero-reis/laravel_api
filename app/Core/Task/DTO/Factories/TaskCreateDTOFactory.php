@@ -9,7 +9,8 @@ class TaskCreateDTOFactory
     public static function createFromArray(array $data): TaskCreateDTO
     {
         return new TaskCreateDTO(
-            name: $data['name'] ?? ''
+            name: $data['name'] ?? '',
+            priority: $data['priority'] ?? '',
         );
     }
 }

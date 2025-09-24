@@ -10,7 +10,8 @@ class TaskUpdateDTOFactory
     {
         return new TaskUpdateDTO(
             id: $data['id'] ?? 0,
-            name: $data['name'] ?? ''
+            name: $data['name'] ?? '',
+            priority: $data['priority'] ?? ''
         );
     }
 }

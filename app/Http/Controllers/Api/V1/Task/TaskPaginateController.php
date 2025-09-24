@@ -24,7 +24,7 @@ class TaskPaginateController
 
             $filters = request()->only(['name', 'is_completed', 'created_at']);
 
-            $tasks = $this->TaskPaginateUseCase->execute($filters);
+            $tasks = $this->TaskPaginateUseCase->execute($filters, 5);
 
             if ($tasks->count() == 0) {
                 throw new NotFoundException('No tasks found', 404);

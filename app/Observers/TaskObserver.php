@@ -15,15 +15,13 @@ class TaskObserver
 
     public function creating(Task $task): void
     {
-        if ($task->priority) {
-            $task->due_date = Carbon::now()->addDays($task->priority);
-        }
+        $task->due_date = Carbon::now()->addDays(intval($task->priority));
     }
 
     public function updating(Task $task): void
     {
         if ($task->isDirty('priority')) {
-            $task->due_date = Carbon::now()->addDays($task->priority);
+            $task->due_date = Carbon::now()->addDays(intval($task->priority));
         }
     }
 }

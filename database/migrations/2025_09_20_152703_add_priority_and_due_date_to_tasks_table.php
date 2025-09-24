@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
             $table->unsignedTinyInteger('priority')->nullable()->after('is_completed');
-            $table->date('due_date')->nullable()->after('priority');
+            $table->timestamp('due_date')->nullable()->after('priority');
         });
     }
 

@@ -27,6 +27,7 @@ class TaskUpdateController
             $dto = TaskUpdateDTOFactory::updateFromArray([
                 'id' => $id,
                 'name' => $request->input('name'),
+                'priority' => $request->input('priority'),
             ]);
 
             $task = $this->useCase->execute($dto);

@@ -21,7 +21,9 @@ class TaskResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'priority' => $this->priority,
             'is_completed' => $this->is_completed ? 1 : 0,
+            'due_date' => Carbon::parse($this->due_date)->format('d/m/Y H:i:s'),
             'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
             'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s'),
             'delivery_status' => $deliveryService->getStatus($this->resource),

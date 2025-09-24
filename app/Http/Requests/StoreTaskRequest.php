@@ -23,7 +23,7 @@ class StoreTaskRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'priority' => 'required|integer|in:123',
+            'priority' => 'required|integer|in:1,2,3',
         ];
     }
 }
