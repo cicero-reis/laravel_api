@@ -9,8 +9,8 @@ class DeliveryStatusService
     public function __construct()
     {
         $this->strategies = [
-            new WithinDeadline,
             new DueToday,
+            new WithinDeadline,
             new Overdue,
         ];
     }

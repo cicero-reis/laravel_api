@@ -10,6 +10,7 @@ class UserDeleteRepository implements UserDeleteRepositoryInterface
     public function deleteRepo(int $id): bool
     {
         $user = User::find($id);
+
         if ($user) {
             return (bool) $user->delete();
         }

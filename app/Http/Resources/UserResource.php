@@ -19,7 +19,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'profile' => config('filesystems.disks.s3.bucket_objetc_url').'/'.$this->profile,
+            'profile' => $this->profile ? config('filesystems.disks.s3.bucket_objetc_url').'/'.$this->profile : null,
             'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
         ];
     }

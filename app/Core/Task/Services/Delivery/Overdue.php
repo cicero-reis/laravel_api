@@ -10,7 +10,7 @@ class Overdue implements DeliveryStatusStrategyInterface
 {
     public function applies($task): bool
     {
-        return Carbon::now()->startOfDay()->get($task->due_date);
+        return Carbon::now()->startOfDay()->gt(Carbon::parse($task->due_date));
     }
 
     public function getStatus(): DeliveryStatus

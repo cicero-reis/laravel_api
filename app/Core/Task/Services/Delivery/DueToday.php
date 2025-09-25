@@ -10,7 +10,7 @@ class DueToday implements DeliveryStatusStrategyInterface
 {
     public function applies($task): bool
     {
-        return Carbon::now()->startOfDay()->equalTo($task->due_date);
+        return Carbon::now()->startOfDay()->isSameDay(Carbon::parse($task->due_date));
     }
 
     public function getStatus(): DeliveryStatus

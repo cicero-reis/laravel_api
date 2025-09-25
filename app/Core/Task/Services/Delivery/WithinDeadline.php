@@ -10,7 +10,7 @@ class WithinDeadline implements DeliveryStatusStrategyInterface
 {
     public function applies($task): bool
     {
-        return Carbon::now()->startOfDay()->lt($task->due_date);
+        return Carbon::now()->startOfDay()->lt(Carbon::parse($task->due_date));
     }
 
     public function getStatus(): DeliveryStatus
