@@ -11,7 +11,7 @@ class UserUpdateRepository implements UserUpdateRepositoryInterface
     public function updateRepo(UserUpdateDTO $dto): ?User
     {
         $user = User::find($dto->id);
-        
+
         if ($user) {
             $user->update($dto->toArray());
 

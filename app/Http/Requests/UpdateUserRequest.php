@@ -27,7 +27,7 @@ class UpdateUserRequest extends FormRequest
         if ($result?->id) {
             return [
                 'name' => 'required|string|max:255',
-                'email' => 'sometimes|required|email|unique:users,email,'. $result->id,
+                'email' => 'sometimes|required|email|unique:users,email,'.$result->id,
             ];
         }
 
