@@ -22,6 +22,7 @@ class UserTaskSummaryUseCase implements UserTaskSummaryUseCaseInterface
 
         if ($user) {
             $result = taskSummaryCollection($user);
+
             return $result;
         }
 

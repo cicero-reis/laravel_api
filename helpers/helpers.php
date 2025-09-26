@@ -37,13 +37,14 @@ if (! function_exists('errorResponse')) {
 }
 
 if (! function_exists('taskSummaryCollection')) {
-    function taskSummaryCollection($user) {
+    function taskSummaryCollection($user)
+    {
         return $user->map(function ($user) {
             $total = $user->tasks->count();
             $onTime = 0;
             $late = 0;
             $pending = 0;
-    
+
             foreach ($user->tasks as $task) {
                 if ($task->completed_at) {
                     if ($task->completed_at <= $task->due_date) {
@@ -55,17 +56,17 @@ if (! function_exists('taskSummaryCollection')) {
                     $pending++;
                 }
             }
-    
+
             return [
                 'user_id' => $user->id,
                 'user_name' => $user->name,
                 'task_summary' => [
-                    'total'   => $total,
+                    'total' => $total,
                     'on_time' => $onTime,
-                    'late'    => $late,
+                    'late' => $late,
                     'pending' => $pending,
-                    'percent_on_time' => $total > 0 ? round(($onTime / $total) * 100, 2) : 0
-                ]
+                    'percent_on_time' => $total > 0 ? round(($onTime / $total) * 100, 2) : 0,
+                ],
             ];
         });
     }

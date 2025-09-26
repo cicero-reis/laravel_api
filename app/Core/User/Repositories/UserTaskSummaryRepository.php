@@ -15,9 +15,9 @@ class UserTaskSummaryRepository implements UserTaskSummaryRepositoryInterface
         $endOfMonth = Carbon::now()->endOfMonth();
 
         return User::where('id', $id)
-                ->with(['tasks' => function ($query) use ($startOfMonth, $endOfMonth) {
-                    $query->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
-                }])
-                ->get();
+            ->with(['tasks' => function ($query) use ($startOfMonth, $endOfMonth) {
+                $query->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+            }])
+            ->get();
     }
 }

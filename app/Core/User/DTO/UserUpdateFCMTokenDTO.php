@@ -5,6 +5,7 @@ namespace App\Core\User\DTO;
 class UserUpdateFCMTokenDTO
 {
     public int $id;
+
     public string $fcm_token;
 
     public function __construct(int $id, string $fcm_token)

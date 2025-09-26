@@ -22,7 +22,7 @@ class UpdateUserFCMTokenRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'fcm_token' => 'required'
+            'fcm_token' => 'required',
         ];
     }
 }
