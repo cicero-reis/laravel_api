@@ -19,6 +19,8 @@ class TaskUpdateControllerTest extends TestCase
         $this->withoutMiddleware();
 
         Gate::shouldReceive('authorize')->andReturn(true);
+
+        Task::flushEventListeners();
     }
 
     public function test_update_task_success()

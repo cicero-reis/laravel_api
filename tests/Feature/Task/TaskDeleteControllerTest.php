@@ -19,6 +19,8 @@ class TaskDeleteControllerTest extends TestCase
         $this->withoutMiddleware();
 
         Gate::shouldReceive('authorize')->andReturn(true);
+
+        Task::flushEventListeners();
     }
 
     public function test_delete_existing_task_returns_no_content()

@@ -19,6 +19,8 @@ class TaskFindControllerTest extends TestCase
         $this->withoutMiddleware();
 
         Gate::shouldReceive('authorize')->andReturn(true);
+
+        Task::flushEventListeners();
     }
 
     public function test_show_returns_task_by_id()

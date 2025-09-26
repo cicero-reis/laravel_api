@@ -18,6 +18,8 @@ class TaskPaginateControllerTest extends TestCase
         $this->withoutMiddleware();
 
         Gate::shouldReceive('authorize')->andReturn(true);
+
+        Task::flushEventListeners();
     }
 
     public function test_index_returns_tasks_list()
