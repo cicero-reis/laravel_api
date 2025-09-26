@@ -20,7 +20,7 @@ class TaskFactory extends Factory
             'name' => $this->faker->sentence,
             'user_id' => rand(0, 5),
             'priority' => rand(1, 3),
-            'is_completed' => 0
+            'is_completed' => 0,
         ];
     }
 }
