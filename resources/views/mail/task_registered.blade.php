@@ -1,7 +1,7 @@
 @component('mail::message')
 # Task, {{ $task->name }}
 
-Seja bem-vindo à nossa aplicação! 🚀
+Task created with priority {{ $task->priority }}! 🚀
 
 @component('mail::button', ['url' => url('/')])
 Acessar Plataforma

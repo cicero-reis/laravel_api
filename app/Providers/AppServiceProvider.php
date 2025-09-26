@@ -105,6 +105,14 @@ class AppServiceProvider extends ServiceProvider
             \App\Core\User\Repositories\Interfaces\UserProfileRepositoryInterface::class,
             \App\Core\User\Repositories\UserProfileRepository::class,
         );
+        $this->app->bind(
+            \App\Core\User\Repositories\Interfaces\UserUpdateFCMTokenRepositoryInterface::class,
+            \App\Core\User\Repositories\UserUpdateFCMTokenRepository::class
+        );
+        $this->app->bind(
+            \App\Core\User\Repositories\Interfaces\UserTaskSummaryRepositoryInterface::class,
+            \App\Core\User\Repositories\UserTaskSummaryRepository::class
+        );
 
         // User Use Case Bindings
         $this->app->bind(
@@ -130,6 +138,14 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             \App\Core\User\UseCases\Interfaces\UserProfileUserCaseInterface::class,
             \App\Core\User\UseCases\UserProfileUserCase::class
+        );
+        $this->app->bind(
+            \App\Core\User\UseCases\Interfaces\UserUpdateFCMTokenUseCaseInterface::class,
+            \App\Core\User\UseCases\UserUpdateFCMTokenUseCase::class
+        );
+        $this->app->bind(
+            \App\Core\User\UseCases\Interfaces\UserTaskSummaryUseCaseInterface::class,
+            \App\Core\User\UseCases\UserTaskSummaryUseCase::class
         );
 
         // JWT Auth Service Binding

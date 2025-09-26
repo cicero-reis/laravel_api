@@ -10,6 +10,8 @@ class TaskIsCompletedFilter
     {
         if (request()->filled('is_completed')) {
             $query->where('is_completed', request('is_completed'));
+        } else {
+            $query->where('is_completed', 0);
         }
 
         return $next($query);

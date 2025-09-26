@@ -3,7 +3,6 @@
 // API Routes
 
 // User Controllers
-
 use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\Auth\LogoutController;
 use App\Http\Controllers\Api\V1\Auth\RefreshController;
@@ -20,7 +19,9 @@ use App\Http\Controllers\Api\V1\User\UserDeleteController;
 use App\Http\Controllers\Api\V1\User\UserFindController;
 use App\Http\Controllers\Api\V1\User\UserListController;
 use App\Http\Controllers\Api\V1\User\UserProfileController;
+use App\Http\Controllers\Api\V1\User\UserTaskSummaryController;
 use App\Http\Controllers\Api\V1\User\UserUpdateController;
+use App\Http\Controllers\Api\V1\User\UserUpdateFCMTokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,8 @@ Route::prefix('v1')->group(function () {
         Route::put('/users/{id}', UserUpdateController::class);
         Route::delete('/users/{id}', UserDeleteController::class);
         Route::post('/users/upload-profile/{id}', [UserProfileController::class, 'upload']);
+        Route::post('/users/fcm-token/{id}', UserUpdateFCMTokenController::class);
+        Route::get('/users/tasksummary/{id}', UserTaskSummaryController::class);
 
         // Task routes
         Route::get('/tasks', TaskPaginateController::class);
@@ -52,15 +55,8 @@ Route::prefix('v1')->group(function () {
         Route::delete('/tasks/{id}', TaskDeleteController::class);
         Route::patch('/tasks/iscompleted/{id}', TaskUpdateIsCompletedController::class);
         Route::patch('/tasks/userid/{id}', TaskUpdateUserIdController::class);
-
-        // Firebase
-        Route::post('/auth/fcm-token', function (Request $request) {
-            $request->user()->update([
-                'fcm_token' => $request->fcm_token,
-            ]);
-
-            return response()->json(['success' => true]);
-        });
     });
 
 });
+
+
