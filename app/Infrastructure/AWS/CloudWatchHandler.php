@@ -40,6 +40,11 @@ class CloudWatchHandler extends AbstractProcessingHandler
 
     protected function write(LogRecord $record): void
     {
+        if (app()->environment('testing')) {
+            // Ignora CloudWatch em testes
+            return;
+        }
+        
         $this->client->putLogEvents([
             'logGroupName' => $this->logGroup,
             'logStreamName' => $this->logStream,

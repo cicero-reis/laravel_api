@@ -4,6 +4,7 @@
 
 Este projeto é uma API desenvolvida em **Laravel 12**, seguindo **Clean Architecture** e princípios **SOLID**.
 Ele gerencia **Tasks** e **Users**, com foco em **notificações agendadas**, **envio de e-mails assíncronos**, integração com **AWS** e comunicação com **microserviços externos**.
+A aplicação é executada em Laravel Octane usando RoadRunner, gerenciado pelo Supervisor.
 
 ## Funcionalidades
 
@@ -29,6 +30,7 @@ Ele gerencia **Tasks** e **Users**, com foco em **notificações agendadas**, **
 * **Factories** → criação de dados de teste
 * **Strategy** → regras de prioridade e farol de entrega
 * **Schedule (Scheduler)** → processamento **agendado (1 vez por dia)** de notificações push **sem uso de filas**
+* **Octane + RoadRunner** → servidor de aplicação de alto desempenho
 
 ## Logs e Monitoramento
 

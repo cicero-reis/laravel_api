@@ -21,6 +21,7 @@
         "maxbanton/cwh": "*",
         "spiral/roadrunner-cli": "^2.6.0",
         "spiral/roadrunner-http": "^3.3.0",
+        "swagger-api/swagger-ui": "^5.29",
         "tymon/jwt-auth": "^2.2"
     },
     "require-dev": {

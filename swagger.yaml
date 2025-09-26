@@ -1,0 +1,304 @@
+openapi: 3.0.3
+info:
+  title: Laravel 12 Task API
+  description: >
+    API REST para gerenciamento de **usuários** e **tasks**.  
+    Autenticação baseada em **JWT**.  
+    Integração com **SQS**, **Firebase Cloud Messaging** e **AWS CloudWatch**.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Ambiente local
+  - url: https://api.suaempresa.com
+    description: Produção
+
+tags:
+  - name: Auth
+    description: Autenticação e controle de sessão
+  - name: Tasks
+    description: Gerenciamento de tarefas
+  - name: Users
+    description: Gerenciamento de usuários
+
+paths:
+  /api/v1/auth/login:
+    post:
+      tags: [Auth]
+      summary: Login do usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: user@email.com
+                password:
+                  type: string
+                  example: secret123
+      responses:
+        "200":
+          description: Login realizado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  token_type:
+                    type: string
+                    example: bearer
+                  expires_in:
+                    type: integer
+
+  /api/v1/auth/logout:
+    post:
+      tags: [Auth]
+      summary: Logout do usuário
+      responses:
+        "200":
+          description: Logout realizado com sucesso
+
+  /api/v1/auth/refresh:
+    post:
+      tags: [Auth]
+      summary: Refresh do token JWT
+      responses:
+        "200":
+          description: Novo token gerado
+
+  /api/v1/tasks:
+    get:
+      tags: [Tasks]
+      summary: Listar tasks (paginação)
+      responses:
+        "200":
+          description: Lista paginada de tasks
+    post:
+      tags: [Tasks]
+      summary: Criar nova task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "Implementar feature X"
+                description:
+                  type: string
+                  example: "Descrição da task"
+                user_id:
+                  type: integer
+      responses:
+        "201":
+          description: Task criada com sucesso
+
+  /api/v1/tasks/{id}:
+    get:
+      tags: [Tasks]
+      summary: Buscar task por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Detalhes da task
+    put:
+      tags: [Tasks]
+      summary: Atualizar task
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Task atualizada
+    delete:
+      tags: [Tasks]
+      summary: Excluir task
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Task excluída
+
+  /api/v1/tasks/iscompleted/{id}:
+    patch:
+      tags: [Tasks]
+      summary: Marcar/desmarcar task como concluída
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Status atualizado
+
+  /api/v1/tasks/userid/{id}:
+    patch:
+      tags: [Tasks]
+      summary: Atualizar usuário associado à task
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Usuário vinculado à task
+
+  /api/v1/users:
+    get:
+      tags: [Users]
+      summary: Listar usuários
+      responses:
+        "200":
+          description: Lista de usuários
+    post:
+      tags: [Users]
+      summary: Criar novo usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "201":
+          description: Usuário criado
+
+  /api/v1/users/{id}:
+    get:
+      tags: [Users]
+      summary: Buscar usuário por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Detalhes do usuário
+    put:
+      tags: [Users]
+      summary: Atualizar usuário
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Usuário atualizado
+    delete:
+      tags: [Users]
+      summary: Deletar usuário
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Usuário deletado
+
+  /api/v1/users/fcm-token/{id}:
+    post:
+      tags: [Users]
+      summary: Atualizar token do Firebase Cloud Messaging
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fcm_token:
+                  type: string
+      responses:
+        "200":
+          description: Token atualizado
+
+  /api/v1/users/tasksummary/{id}:
+    get:
+      tags: [Users]
+      summary: Resumo das tasks de um usuário
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Resumo de tasks do usuário
+
+  /api/v1/users/upload-profile/{id}:
+    post:
+      tags: [Users]
+      summary: Upload da foto de perfil do usuário
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: Upload realizado
