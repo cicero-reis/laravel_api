@@ -37,24 +37,25 @@ Route::prefix('v1')->group(function () {
 
     Route::middleware(['auth:api', 'role:dev,admin,user'])->group(function () {
 
-        // User routes
-        Route::get('/users', UserListController::class);
-        Route::get('/users/{id}', UserFindController::class);
-        Route::post('/users', UserCreateController::class);
-        Route::put('/users/{id}', UserUpdateController::class);
-        Route::delete('/users/{id}', UserDeleteController::class);
-        Route::post('/users/upload-profile/{id}', [UserProfileController::class, 'upload']);
-        Route::post('/users/fcm-token/{id}', UserUpdateFCMTokenController::class);
-        Route::get('/users/tasksummary/{id}', UserTaskSummaryController::class);
+        Route::prefix('users')->group(function () {
+            Route::get('/', UserListController::class);
+            Route::get('/{id}', UserFindController::class);
+            Route::post('/', UserCreateController::class);
+            Route::put('/{id}', UserUpdateController::class);
+            Route::delete('/{id}', UserDeleteController::class);
+            Route::post('/upload-profile/{id}', [UserProfileController::class, 'upload']);
+            Route::post('/fcm-token/{id}', UserUpdateFCMTokenController::class);
+            Route::get('/{id}/tasksummary', UserTaskSummaryController::class);
+        });
 
-        // Task routes
-        Route::get('/tasks', TaskPaginateController::class);
-        Route::get('/tasks/{id}', TaskFindController::class);
-        Route::post('/tasks', TaskCreateController::class);
-        Route::put('/tasks/{id}', TaskUpdateController::class);
-        Route::delete('/tasks/{id}', TaskDeleteController::class);
-        Route::patch('/tasks/iscompleted/{id}', TaskUpdateIsCompletedController::class);
-        Route::patch('/tasks/userid/{id}', TaskUpdateUserIdController::class);
+        Route::prefix('tasks')->group(function () {
+            Route::get('/', TaskPaginateController::class);
+            Route::get('/{id}', TaskFindController::class);
+            Route::post('/', TaskCreateController::class);
+            Route::put('/{id}', TaskUpdateController::class);
+            Route::delete('/{id}', TaskDeleteController::class);
+            Route::patch('/iscompleted/{id}', TaskUpdateIsCompletedController::class);
+            Route::patch('/userid/{id}', TaskUpdateUserIdController::class);
+        });
     });
-
 });
