@@ -44,7 +44,7 @@ class CloudWatchHandler extends AbstractProcessingHandler
             // Ignora CloudWatch em testes
             return;
         }
-        
+
         $this->client->putLogEvents([
             'logGroupName' => $this->logGroup,
             'logStreamName' => $this->logStream,

@@ -2,15 +2,15 @@
 
 namespace App\Core\User\UseCases;
 
+use App\Core\Task\Services\Delivery\DeliveryStatusService;
 use App\Core\User\Repositories\Interfaces\UserTaskSummaryRepositoryInterface;
 use App\Core\User\UseCases\Interfaces\UserTaskSummaryUseCaseInterface;
 use Illuminate\Support\Collection;
-use App\Core\Task\Services\Delivery\DeliveryStatusService;
-use App\Core\Task\Services\Enums\DeliveryStatus;
 
 class UserTaskSummaryUseCase implements UserTaskSummaryUseCaseInterface
 {
     public UserTaskSummaryRepositoryInterface $repo;
+
     public DeliveryStatusService $deliveryService;
 
     public function __construct(UserTaskSummaryRepositoryInterface $repo)
@@ -33,7 +33,7 @@ class UserTaskSummaryUseCase implements UserTaskSummaryUseCaseInterface
         return $result;
     }
 
-    function taskSummaryCollection($user)
+    public function taskSummaryCollection($user)
     {
         return $user->map(function ($user) {
             $total = $user->tasks->count();
@@ -47,12 +47,12 @@ class UserTaskSummaryUseCase implements UserTaskSummaryUseCaseInterface
 
                 if ($task->is_completed == 1) {
 
-                    if($result['value'] == 'Within deadline' || $result['value'] == 'Due today') {
+                    if ($result['value'] == 'Within deadline' || $result['value'] == 'Due today') {
                         $onTime++;
                     }
 
-                    if($result['value'] == 'Overdue') {
-                      $late++;   
+                    if ($result['value'] == 'Overdue') {
+                        $late++;
                     }
 
                 } else {
