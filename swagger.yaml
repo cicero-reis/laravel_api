@@ -9,8 +9,6 @@ info:
 servers:
   - url: http://localhost:8001
     description: Ambiente local
-  - url: https://api.suaempresa.com
-    description: Produção
 
 tags:
   - name: Auth
@@ -21,6 +19,11 @@ tags:
     description: Gerenciamento de usuários
 
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   parameters:
     AcceptHeader:
       name: Accept
@@ -37,6 +40,9 @@ components:
         type: string
         example: application/json
 
+security:
+  - bearerAuth: []
+  
 paths:
   /api/v1/auth/login:
     post:
@@ -54,10 +60,10 @@ paths:
               properties:
                 email:
                   type: string
-                  example: user@email.com
+                  example: cintia@example.com
                 password:
                   type: string
-                  example: secret123
+                  example: password
       responses:
         "200":
           description: Login realizado com sucesso
