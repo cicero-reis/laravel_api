@@ -1,0 +1,91 @@
+name: Laravel API Task
+
+on:
+  push:
+    branches: [ "main", "master", "develop", "DEV-*" ]
+  pull_request:
+
+jobs:
+
+  lint:
+    name: 🔍 Análise de código (Pint)
+    runs-on: ubuntu-latest
+    continue-on-error: false
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configurar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, bcmath, pdo_mysql
+          coverage: none
+
+      - name: Instalar dependências
+        run: composer install --prefer-dist --no-progress --no-suggest --no-interaction
+
+      - name: Rodar Pint
+        run: ./vendor/bin/pint --test
+
+
+
+  build:
+    name: 🛠️ Build da aplicação
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v3
+      - name: Simular build
+        run: echo "🔧 Simulando docker build..."
+
+  infra:
+    name: ⚙️ Terraform Apply
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Simular infraestrutura
+        run: echo "🧱 Simulando terraform init & apply..."
+
+  test:
+    name: ✅ Testes (PHPUnit)
+    runs-on: ubuntu-latest
+    continue-on-error: false
+    needs: infra
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configurar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, bcmath, pdo_mysql
+          coverage: none
+
+      - name: Instalar dependências
+        run: composer install --prefer-dist --no-progress --no-suggest --no-interaction
+
+      - name: Copiar .env de exemplo
+        run: cp .env.example .env
+
+      - name: Gerar chave da aplicação
+        run: php artisan key:generate
+
+      - name: Rodar migrations (usando SQLite para teste)
+        run: |
+          touch database/database.sqlite
+          php artisan migrate --force --database=sqlite
+
+      - name: Rodar PHPUnit
+        run: ./vendor/bin/phpunit --testdox
+
+  deploy:
+    name: 🚀 Deploy
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v3
+      - name: Mensagem final de deploy
+        run: echo "🎉 Deploy simbólico concluído com sucesso!"
+
