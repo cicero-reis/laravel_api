@@ -34,7 +34,8 @@ Route::prefix('v1')->group(function () {
     Route::post('/auth/login', LoginController::class)->name('api.v1.auth.login');
     Route::post('/auth/refresh', RefreshController::class)->name('api.v1.auth.refresh');
     Route::post('/auth/logout', LogoutController::class)->name('api.v1.auth.logout');
-
+    Route::post('/auth/create', UserCreateController::class);
+    
     Route::middleware(['auth:api', 'role:dev,admin,user'])->group(function () {
 
         Route::prefix('users')->group(function () {

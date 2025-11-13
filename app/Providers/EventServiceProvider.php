@@ -14,7 +14,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         TaskRegisteredEvent::class => [
             SendTaskEmailListener::class,
-            LogTaskListener::class,
+            //LogTaskListener::class,
         ],
 
         UserRegisteredEvent::class => [

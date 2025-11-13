@@ -22,8 +22,6 @@ class SendTaskReminderJob
             ->chunk(500, function ($tasks) use ($fcm, $deliveryStatus) {
                 foreach ($tasks as $task) {
 
-                    echo $task->id.PHP_EOL;
-
                     if (! $task->user || ! $task->user->fcm_token) {
                         continue;
                     }

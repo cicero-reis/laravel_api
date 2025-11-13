@@ -1,8 +1,10 @@
 FROM php:8.2.28-cli
 
 # Argumentos de usuário
-ARG user=creis
-ARG uid=1000
+# Criar usuário com o mesmo UID e GID do host
+ARG HOST_UID=1001
+ARG HOST_GID=1001
+ARG USERNAME=creis
 
 # Diretório de trabalho
 WORKDIR /application
@@ -65,19 +67,10 @@ RUN curl -Ls https://github.com/roadrunner-server/roadrunner/releases/latest/dow
     -o /usr/local/bin/rr \
     && chmod +x /usr/local/bin/rr
 
-# Criar usuário não-root
-RUN useradd -G www-data,root -u $uid -d /home/$user $user \
-    && mkdir -p /home/$user/.composer \
-    && chown -R $user:$user /home/$user
-
-# Ajustar permissões no diretório /var e outros diretórios importantes
-RUN chown -R $user:www-data /var && chmod -R 775 /var \
-    && mkdir -p /application/logs \
-    && chown -R $user:$user /application/logs \
-    && chmod -R 775 /application/logs \
-    && touch /application/supervisord.log \
-    && chown $user:$user /application/supervisord.log \
-    && chmod 777 /application/supervisord.log
+RUN groupadd -g ${HOST_GID} ${USERNAME} \
+    && useradd -m -u ${HOST_UID} -g ${HOST_GID} -s /bin/bash ${USERNAME} \
+    && chown -R ${USERNAME}:${USERNAME} /application \
+    && chmod -R 775 /application
 
 # Copiar configurações customizadas do PHP
 COPY php.ini /usr/local/etc/php/php.ini
@@ -89,9 +82,6 @@ COPY supervisor.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Copiar configuração do RoadRunner
 COPY .rr.yaml /application/.rr.yaml
-
-# Mudar para usuário não-root
-USER $user
 
 # Expor a porta do RoadRunner
 EXPOSE 8080
