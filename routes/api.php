@@ -24,6 +24,8 @@ use App\Http\Controllers\Api\V1\User\UserUpdateController;
 use App\Http\Controllers\Api\V1\User\UserUpdateFCMTokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+// ETL
+use App\Http\Controllers\Api\V1\ETL\ETLController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -57,6 +59,11 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{id}', TaskDeleteController::class);
             Route::patch('/iscompleted/{id}', TaskUpdateIsCompletedController::class);
             Route::patch('/userid/{id}', TaskUpdateUserIdController::class);
+        });
+
+        Route::prefix('etl')->group(function () {
+            Route::get('/transform-tasks', [ETLController::class, 'transformTasks']);
+            Route::get('/dashboard', [ETLController::class, 'dashboard']);
         });
     });
 });
