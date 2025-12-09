@@ -6,12 +6,13 @@
 use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\Auth\LogoutController;
 use App\Http\Controllers\Api\V1\Auth\RefreshController;
+use App\Http\Controllers\Api\V1\ETL\ETLController;
 use App\Http\Controllers\Api\V1\Task\TaskCreateController;
 use App\Http\Controllers\Api\V1\Task\TaskDeleteController;
 use App\Http\Controllers\Api\V1\Task\TaskFindController;
 use App\Http\Controllers\Api\V1\Task\TaskPaginateController;
-use App\Http\Controllers\Api\V1\Task\TaskUpdateController;
 // Task Controllers
+use App\Http\Controllers\Api\V1\Task\TaskUpdateController;
 use App\Http\Controllers\Api\V1\Task\TaskUpdateIsCompletedController;
 use App\Http\Controllers\Api\V1\Task\TaskUpdateUserIdController;
 use App\Http\Controllers\Api\V1\User\UserCreateController;
@@ -23,9 +24,8 @@ use App\Http\Controllers\Api\V1\User\UserTaskSummaryController;
 use App\Http\Controllers\Api\V1\User\UserUpdateController;
 use App\Http\Controllers\Api\V1\User\UserUpdateFCMTokenController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 // ETL
-use App\Http\Controllers\Api\V1\ETL\ETLController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -63,7 +63,7 @@ Route::prefix('v1')->group(function () {
 
         Route::prefix('etl')->group(function () {
             Route::get('/transform-tasks', [ETLController::class, 'transformTasks']);
-            Route::get('/dashboard', [ETLController::class, 'dashboard']);
+            // Route::get('/dashboard', [ETLController::class, 'dashboard']);
         });
     });
 });

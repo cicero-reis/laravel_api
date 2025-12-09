@@ -23,14 +23,14 @@ class ETLTasks extends Command
      *
      * @var string
      */
-     protected $description = 'ETL completo: summary, ranking, prioridade, status e JSON frontend';
+    protected $description = 'ETL completo: summary, ranking, prioridade, status e JSON frontend';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        $this->info("Iniciando ETL completo...");
+        $this->info('Iniciando ETL completo...');
 
         $today = Carbon::today();
         $users = User::all();
@@ -92,10 +92,10 @@ class ETLTasks extends Command
             );
         }
 
-        $this->info("ETL completo atualizado com ranking e prioridade.");
+        $this->info('ETL completo atualizado com ranking e prioridade.');
 
         // Gerar JSON pronto para frontend
-        $json = $ranked->map(function($item) {
+        $json = $ranked->map(function ($item) {
             $status = DeliveryStatus::WITHIN_DEADLINE->value;
             $color = DeliveryStatus::WITHIN_DEADLINE->color();
 
@@ -129,8 +129,8 @@ class ETLTasks extends Command
         });
 
         // Salvar JSON no storage (opcional)
-        #\Storage::disk('local')->put('tasks_summary.json', $json->toJson(JSON_PRETTY_PRINT));
+        // \Storage::disk('local')->put('tasks_summary.json', $json->toJson(JSON_PRETTY_PRINT));
 
-        $this->info("JSON para frontend gerado: storage/app/tasks_summary.json");
+        $this->info('JSON para frontend gerado: storage/app/tasks_summary.json');
     }
 }

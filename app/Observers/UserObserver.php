@@ -9,6 +9,6 @@ class UserObserver
 {
     public function created(User $user): void
     {
-        UserRegisteredEvent::dispatch($user);
+        // UserRegisteredEvent::dispatch($user);
     }
 }

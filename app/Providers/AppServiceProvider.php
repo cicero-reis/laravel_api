@@ -50,6 +50,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Core\Task\Repositories\TaskUpdateUserIdRepository::class
         );
 
+        $this->app->bind(
+            \App\Core\Task\Repositories\Interfaces\TaskETLRepositoryInterface::class,
+            \App\Core\Task\Repositories\TaskETLRepository::class
+        );
+
         // Task Use Case Bindings
         $this->app->bind(
             \App\Core\Task\UseCases\Interfaces\TaskPaginateUseCaseInterface::class,
@@ -165,6 +170,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             \App\Infrastructure\AWS\S3\S3RepositoryInterface::class,
             \App\Infrastructure\AWS\S3\S3Repository::class
+        );
+
+        $this->app->bind(
+            \App\Core\Task\UseCases\Interfaces\TaskETLUseCaseInterface::class,
+            \App\Core\Task\UseCases\TaskETLUseCase::class
         );
 
         // Strategies

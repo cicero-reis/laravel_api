@@ -11,14 +11,14 @@ class TaskObserver
 {
     public function created(Task $task): void
     {
-        TaskLog::create([
-            'task_id' => $task->id,
-            'user_id' => request()->user()->id,
-            'action' => 'created',
-            'changes' => $task->getAttributes(),
-        ]);
+        // TaskLog::create([
+        //     'task_id' => $task->id,
+        //     'user_id' => request()->user()->id,
+        //     'action' => 'created',
+        //     'changes' => $task->getAttributes(),
+        // ]);
 
-        TaskRegisteredEvent::dispatch($task);
+        // TaskRegisteredEvent::dispatch($task);
     }
 
     public function creating(Task $task): void

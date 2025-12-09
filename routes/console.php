@@ -9,5 +9,5 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-Schedule::job(new SendTaskReminderJob)->dailyAt('08:00'); #->everyMinute(); // ->dailyAt('08:00');
+Schedule::job(new SendTaskReminderJob)->dailyAt('08:00'); // ->everyMinute(); // ->dailyAt('08:00');
 Schedule::command('etl:tasks')->everyMinute();
