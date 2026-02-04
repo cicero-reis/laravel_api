@@ -63,7 +63,7 @@ Route::prefix('v1')->group(function () {
 
         Route::prefix('etl')->group(function () {
             Route::get('/transform-tasks', [ETLController::class, 'transformTasks']);
-            // Route::get('/dashboard', [ETLController::class, 'dashboard']);
+            Route::get('/dashboard', [ETLController::class, 'dashboard']);
         });
     });
 });

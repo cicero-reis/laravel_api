@@ -24,7 +24,7 @@ class TaskTransformService
 
         return [
             'task_id' => $task->id,
-            'user_name' => $task->user->name,
+            'user_name' =>  $task->user->name ?? 'Unassigned',
             'task_name' => $task->name,
             'priority' => $task->priority,
             'due_date' => $task->due_date,

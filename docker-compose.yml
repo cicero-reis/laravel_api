@@ -1,13 +1,13 @@
 services:
 
   app:
-    image: ciceroreis/laravel:latest
+    image: creis/laravel_12:latest
     container_name: app
     ports:
       - "8001:8080"
     volumes:
       - ./:/application
-    user: ${UID}:${GID}
+    #user: ${UID}:${GID}
     environment:
       - APP_ENV=local
       - APP_DEBUG=true

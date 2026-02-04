@@ -2,8 +2,8 @@ FROM php:8.2.28-cli
 
 # Argumentos de usuário
 # Criar usuário com o mesmo UID e GID do host
-ARG HOST_UID=1001
-ARG HOST_GID=1001
+ARG HOST_UID=1000
+ARG HOST_GID=1000
 ARG USERNAME=creis
 
 # Diretório de trabalho
@@ -69,8 +69,17 @@ RUN curl -Ls https://github.com/roadrunner-server/roadrunner/releases/latest/dow
 
 RUN groupadd -g ${HOST_GID} ${USERNAME} \
     && useradd -m -u ${HOST_UID} -g ${HOST_GID} -s /bin/bash ${USERNAME} \
-    && chown -R ${USERNAME}:${USERNAME} /application \
-    && chmod -R 775 /application
+    && mkdir -p /var/log/supervisor /application/storage /application/bootstrap/cache \
+    && chown -R ${USERNAME}:${USERNAME} \
+        /application \
+        /var/log/supervisor \
+        /application/storage \
+        /application/bootstrap/cache \
+    && chmod -R 775 \
+        /application \
+        /var/log/supervisor \
+        /application/storage \
+        /application/bootstrap/cache
 
 # Copiar configurações customizadas do PHP
 COPY php.ini /usr/local/etc/php/php.ini
@@ -82,6 +91,11 @@ COPY supervisor.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Copiar configuração do RoadRunner
 COPY .rr.yaml /application/.rr.yaml
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
 
 # Expor a porta do RoadRunner
 EXPOSE 8080
