@@ -74,6 +74,20 @@ services:
     networks:
         - laravel_network
 
+    sonarqube:
+      image: sonarqube:lts
+      container_name: sonarqube
+      ports:
+        - "9000:9000"
+      environment:
+        - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+      volumes:
+        - sonarqube_data:/opt/sonarqube/data
+        - sonarqube_extensions:/opt/sonarqube/extensions
+        - sonarqube_logs:/opt/sonarqube/logs
+      networks:
+        - laravel_network
+
 networks:
   laravel_network:
     name: laravel_network
@@ -91,4 +105,13 @@ volumes:
     driver: local
   localstack_data:
     name: localstack_data
+    driver: local
+  sonarqube_data:
+    name: sonarqube_data
+    driver: local
+  sonarqube_extensions:
+    name: sonarqube_extensions
+    driver: local
+  sonarqube_logs:
+    name: sonarqube_logs
     driver: local
