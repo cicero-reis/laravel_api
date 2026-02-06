@@ -25,6 +25,7 @@ Homestead.yaml
 Thumbs.db
 rr
 .rr.yaml
+/linux
 supervisord.log
 supervisord.pid
 .terraform/
